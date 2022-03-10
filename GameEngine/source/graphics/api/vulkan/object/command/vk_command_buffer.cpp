@@ -141,6 +141,12 @@ namespace Graphics
 		vkCmdBindIndexBuffer(m_CommandBufferObj, ((VKBuffer*)_indexBuffer)->GetVKBuffer(), 0, ((VKBuffer*)_indexBuffer)->GetIndexFormat());
 	}
 
+	void VKCommandBuffer::SetConstants(void* _data, const uint32_t _offset, const uint32_t _size, const uint32_t _parameterIndex)
+	{
+		// TODO:: Find way to nicely abstract vertex bit
+		vkCmdPushConstants(m_CommandBufferObj, m_CurrentInputLayout->GetVKInputLayout(), VK_SHADER_STAGE_VERTEX_BIT, _offset, _size, _data);
+	}
+
 	void VKCommandBuffer::SetDescriptorSet(DescriptorSet* _descriptorSet, const uint32_t _parameterIndex)
 	{
 		VkDescriptorSet set = ((VKDescriptorSet*)_descriptorSet)->GetVKDescriptorSet();

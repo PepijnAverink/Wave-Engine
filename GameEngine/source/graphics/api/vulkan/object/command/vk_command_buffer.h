@@ -29,6 +29,7 @@ namespace Graphics
 		virtual void SetVertexBuffer(Buffer* _vertexBuffer, const uint32_t _binding) override;
 		virtual void SetIndexBuffer(Buffer* _indexBuffer) override;
 
+		virtual void SetConstants(void* _data, const uint32_t _offset, const uint32_t _size, const uint32_t _parameterIndex) override;
 		virtual void SetDescriptorSet(DescriptorSet* _descriptorSet, const uint32_t _parameterIndex) override;
 
 		virtual void SetGraphicsPipeline(GraphicsPipeline* _graphicsPipeline) override;

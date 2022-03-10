@@ -5,10 +5,11 @@
 #include <../../GameEngine/dependencies/include/glm/gtc/matrix_transform.hpp>
 
 struct UniformBufferObject {
-    glm::mat4 model;
     glm::mat4 view;
     glm::mat4 proj;
 };
+
+glm::mat4 model;
 
 struct Vertex {
     float pos[2];
@@ -131,7 +132,8 @@ void Application::OnInitialize()
     // Create inputLayout
     InputLayoutDescriptor inputLayoutDesc = {};
     inputLayoutDesc.Name = "InputLayout";
-    inputLayoutDesc.Layouts = { InputSet({ { "CameraWhatevs", INPUT_TYPE_UNIFORM_BUFFER, SHADER_TYPE_FLAG_VERTEX, 0, 1 }, }), };
+    inputLayoutDesc.Layouts = { InputSet({ { "ModelMatrix", INPUT_TYPE_CONSTANT, SHADER_TYPE_FLAG_VERTEX, 0, sizeof(UniformBufferObject) }, }),
+                                InputSet({ { "CameraMatrices", INPUT_TYPE_UNIFORM_BUFFER, SHADER_TYPE_FLAG_VERTEX, 0, 1 }, }), };
 
     m_InputLayout = m_RenderDevice->CreateInputLayout(&inputLayoutDesc);
 
@@ -213,7 +215,7 @@ void Application::OnInitialize()
     delete stagingBufferI;
 
     UniformBufferObject ubo{};
-    ubo.model = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     ubo.proj = glm::perspective(glm::radians(45.0f), m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight(), 0.1f, 10.0f);
     ubo.proj[1][1] *= -1;
@@ -316,6 +318,7 @@ void Application::Run()
     
         m_CommandBuffer->SetGraphicsPipeline(m_GraphicsPipeline);
     
+        m_CommandBuffer->SetConstants(&model, 0, sizeof(glm::mat4), 0);
         m_CommandBuffer->SetDescriptorSet(m_DescriptorSet, 0);
     
         m_CommandBuffer->SetVertexBuffer(m_VertexBuffer, 0);

@@ -36,6 +36,7 @@ namespace Graphics
 		virtual void SetVertexBuffer(Buffer* _vertexBuffer, const uint32_t _binding) = 0;
 		virtual void SetIndexBuffer(Buffer* _indexBuffer) = 0;
 
+		virtual void SetConstants(void* _data, const uint32_t _offset, const uint32_t _size, const uint32_t _parameterIndex) = 0;
 		virtual void SetDescriptorSet(DescriptorSet* _descriptorSet, const uint32_t _parameterIndex) = 0;
 
 		virtual void SetGraphicsPipeline(GraphicsPipeline* _graphicsPipeline) = 0;

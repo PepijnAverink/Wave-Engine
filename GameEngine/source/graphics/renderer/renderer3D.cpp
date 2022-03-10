@@ -8,10 +8,4 @@ namespace Graphics
 	void Renderer3D::OnTerminate()
 	{
 	}
-	void Renderer3D::DrawMesh(Mesh* _mesh)
-	{
-	}
-	void Renderer3D::DrawSubMesh(Mesh* _mesh, const uint32_t _subMeshID)
-	{
-	}
 }

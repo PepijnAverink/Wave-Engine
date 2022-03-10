@@ -22,6 +22,8 @@ namespace Graphics
 		InputType       Type;
 		ShaderTypeFlag  StageFlag;
 		uint32_t	    BaseRegisterID;
-		uint32_t	    Count;
+		// Count is used for regular elements
+		// Size is used for constants
+		union { uint32_t Count; uint32_t Size; };
 	};
 }
