@@ -1,0 +1,12 @@
+#pragma once
+
+namespace Graphics
+{
+	enum FrameBufferAttachmentType
+	{
+		FRAME_BUFFER_ATTACHMENT_TYPE_NONE		   = 0x00,
+		FRAME_BUFFER_ATTACHMENT_TYPE_ERROR		   = 0x01,
+		FRAME_BUFFER_ATTACHMENT_TYPE_COLOR		   = 0x02,
+		FRAME_BUFFER_ATTACHMENT_TYPE_DEPTH_STENCIL = 0x03,
+	};
+}
