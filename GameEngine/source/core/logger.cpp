@@ -1,4 +1,4 @@
-#include "./core/logger.h"
+#include "stdafx.h"
 
 Logger* Logger::Create(const std::string& _filename)
 {

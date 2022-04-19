@@ -95,6 +95,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)dependencies\include\;$(VULKAN_SDK)\Include\;$(ProjectDir)\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,6 +115,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)dependencies\include\;$(VULKAN_SDK)\Include\;$(ProjectDir)\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +135,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)dependencies\include\;$(VULKAN_SDK)\Include\;$(ProjectDir)\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,6 +155,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)dependencies\include\;$(VULKAN_SDK)\Include\;$(ProjectDir)\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,7 +167,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\core\logger.cpp" />
+    <ClCompile Include="source\core\logger.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="source\core\system\file_system.cpp" />
     <ClCompile Include="source\core\window\window.cpp" />
     <ClCompile Include="source\graphics\api\interface\object\command\command_buffer.cpp" />
@@ -203,6 +212,12 @@
     <ClCompile Include="source\graphics\renderer\renderer3D.cpp" />
     <ClCompile Include="source\graphics\renderer\renderer_backend.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\core\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\core\event\event.h" />
@@ -313,6 +328,7 @@
     <ClInclude Include="source\graphics\renderer\model\vertex.h" />
     <ClInclude Include="source\graphics\renderer\renderer3D.h" />
     <ClInclude Include="source\graphics\renderer\renderer_backend.h" />
+    <ClInclude Include="source\core\stdafx.h" />
     <ClInclude Include="source\utility\hash_utility.h" />
     <ClInclude Include="source\utility\string_utility.h" />
     <ClInclude Include="source\utility\version.h" />

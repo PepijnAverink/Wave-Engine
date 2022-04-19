@@ -1,9 +1,5 @@
-#include "./application.h"
-#include "./core/event/event_dispatcher.h"
 
-#include <../../GameEngine/dependencies/include/glm/glm.hpp>
-#include <../../GameEngine/dependencies/include/glm/gtc/matrix_transform.hpp>
-
+#include "stdafx.h"
 struct UniformBufferObject {
     glm::mat4 view;
     glm::mat4 proj;
