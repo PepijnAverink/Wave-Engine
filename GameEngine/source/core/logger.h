@@ -2,6 +2,7 @@
 
 
 
+#include <string>
 enum LogType
 {
 	LOG_TYPE_UNKNOWN = 0x00,
