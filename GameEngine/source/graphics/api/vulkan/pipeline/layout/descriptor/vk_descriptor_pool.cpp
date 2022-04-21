@@ -1,7 +1,8 @@
-#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_pool.h"
-#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_set.h"
-#include "./graphics/api/vulkan/pipeline/layout/vk_input_type.h"
-#include "./graphics/api/vulkan/pipeline/layout/vk_input_type.h"
+//#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_pool.h"
+//#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_set.h"
+//#include "./graphics/api/vulkan/pipeline/layout/vk_input_type.h"
+//#include "./graphics/api/vulkan/pipeline/layout/vk_input_type.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

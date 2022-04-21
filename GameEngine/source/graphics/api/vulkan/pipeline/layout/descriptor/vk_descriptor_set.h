@@ -1,6 +1,6 @@
 #pragma once
-#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_set.h"
-#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_pool.h"
+//#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_set.h"
+//#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_pool.h"
 
 namespace Graphics
 {

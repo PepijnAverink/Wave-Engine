@@ -1,6 +1,6 @@
 #pragma once
-#include "./graphics/api/interface/resource/texture/texture2D.h"
-#include "./graphics/api/vulkan/vk_render_device.h"
+//#include "./graphics/api/interface/resource/texture/texture2D.h"
+//#include "./graphics/api/vulkan/vk_render_device.h"
 namespace Graphics
 {
 	class VKTexture2D final : public Texture2D

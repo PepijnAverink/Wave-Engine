@@ -1,8 +1,9 @@
 #pragma once
-#include "./graphics/api/interface/resource/shader/shader_descriptor.h"
+#include "./graphics/api/interface/resource/shader/shader_type.h"
 
 namespace Graphics
 {
+	
 	class Shader
 	{
 	public:

@@ -1,4 +1,5 @@
-#include "./graphics/api/vulkan/object/sync/vk_fence.h"
+//#include "./graphics/api/vulkan/object/sync/vk_fence.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

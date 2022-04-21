@@ -1,4 +1,5 @@
-#include "./graphics/api/interface/object/command/command_queue.h"
+//#include "./graphics/api/interface/object/command/command_queue.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

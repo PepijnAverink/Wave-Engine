@@ -1,5 +1,5 @@
-#include "./graphics/api/interface/resource/shader/shader.h"
-
+//#include "./graphics/api/interface/resource/shader/shader.h"
+#include "core/stdafx.h"
 namespace Graphics
 {
 	Shader::Shader(const ShaderDescriptor* _shaderDescriptor)

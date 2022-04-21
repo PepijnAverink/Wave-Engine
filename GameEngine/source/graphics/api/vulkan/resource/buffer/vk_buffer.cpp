@@ -1,7 +1,8 @@
-#include "./graphics/api/vulkan/resource/buffer/vk_buffer.h"
-#include "./graphics/api/vulkan/resource/buffer/vk_buffer_usage.h"
-#include "./graphics/api/vulkan/resource/vk_resource_memory_type.h"
-#include "./graphics/api/vulkan/resource/vk_resource_format.h"
+//#include "./graphics/api/vulkan/resource/buffer/vk_buffer.h"
+//#include "./graphics/api/vulkan/resource/buffer/vk_buffer_usage.h"
+//#include "./graphics/api/vulkan/resource/vk_resource_memory_type.h"
+//#include "./graphics/api/vulkan/resource/vk_resource_format.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

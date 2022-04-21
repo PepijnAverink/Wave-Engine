@@ -5,6 +5,7 @@
 
 namespace Graphics
 {
+	/*enum ShaderType : int;*/
 	class ShaderDescriptor
 	{
 	public:

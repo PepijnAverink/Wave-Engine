@@ -1,4 +1,5 @@
-#include "./graphics/api/interface/pipeline/layout/input_layout.h"
+//#include "./graphics/api/interface/pipeline/layout/input_layout.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

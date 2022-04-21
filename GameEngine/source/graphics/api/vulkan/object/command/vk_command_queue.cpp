@@ -1,7 +1,7 @@
-#include "./graphics/api/vulkan/object/command/vk_command_queue.h"
-#include "./graphics/api/vulkan/object/command/vk_command_buffer.h"
-#include "./graphics/api/vulkan/object/sync/vk_fence.h"
-
+//#include "./graphics/api/vulkan/object/command/vk_command_queue.h"
+//#include "./graphics/api/vulkan/object/command/vk_command_buffer.h"
+//#include "./graphics/api/vulkan/object/sync/vk_fence.h"
+#include "core/stdafx.h"
 namespace Graphics
 {
 	VKCommandQueue::VKCommandQueue(VKRenderDevice* _renderDevice, const CommandQueueDescriptor* _commandQueueDescriptor)

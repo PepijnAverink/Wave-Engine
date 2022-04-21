@@ -1,5 +1,5 @@
-#include "./graphics/renderer/renderer3D.h"
-
+//#include "./graphics/renderer/renderer3D.h"
+#include "core/stdafx.h"
 namespace Graphics
 {
 	void Renderer3D::OnInitialize(RendererBackend* _backend)

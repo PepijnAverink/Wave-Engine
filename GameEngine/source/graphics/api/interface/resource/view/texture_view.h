@@ -1,9 +1,10 @@
 #pragma once
-#include "./graphics/api/interface/resource/view/texture_view_descriptor.h"
+//#include "./graphics/api/interface/resource/view/texture_view_descriptor.h"
 
 namespace Graphics
 {
 	class Texture2D;
+	class TextureViewDescriptor;
 	class TextureView
 	{
 	public:

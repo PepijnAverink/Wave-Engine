@@ -1,16 +1,17 @@
-#include "./graphics/api/vulkan/pipeline/graphics/vk_graphics_pipeline.h"
-#include "./graphics/api/vulkan/pipeline/layout/vk_input_layout.h"
-#include "./graphics/api/vulkan/pipeline/graphics/topology/vk_topology.h"
-#include "./graphics/api/vulkan/pipeline/graphics/rasterizer/vk_cull_mode.h"
-#include "./graphics/api/vulkan/pipeline/graphics/rasterizer/vk_fill_mode.h"
-#include "./graphics/api/vulkan/pipeline/graphics/rasterizer/vk_winding_order.h"
-#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
-#include "./graphics/api/vulkan/resource/shader/vk_shader.h"
-#include "./graphics/api/vulkan/resource/vk_resource_format.h"
-
-#include "./utility/string_utility.h"
-
-#include <vector>
+//#include "./graphics/api/vulkan/pipeline/graphics/vk_graphics_pipeline.h"
+//#include "./graphics/api/vulkan/pipeline/layout/vk_input_layout.h"
+//#include "./graphics/api/vulkan/pipeline/graphics/topology/vk_topology.h"
+//#include "./graphics/api/vulkan/pipeline/graphics/rasterizer/vk_cull_mode.h"
+//#include "./graphics/api/vulkan/pipeline/graphics/rasterizer/vk_fill_mode.h"
+//#include "./graphics/api/vulkan/pipeline/graphics/rasterizer/vk_winding_order.h"
+//#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
+//#include "./graphics/api/vulkan/resource/shader/vk_shader.h"
+//#include "./graphics/api/vulkan/resource/vk_resource_format.h"
+//
+//#include "./utility/string_utility.h"
+//
+//#include <vector>
+#include "core/stdafx.h"
 
 namespace Graphics
 {

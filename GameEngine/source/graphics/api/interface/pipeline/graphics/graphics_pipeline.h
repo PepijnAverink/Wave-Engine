@@ -1,5 +1,5 @@
 #pragma once
-#include "./graphics/api/interface/pipeline/graphics/graphics_pipeline_descriptor.h"
+//#include "./graphics/api/interface/pipeline/graphics/graphics_pipeline_descriptor.h"
 
 namespace Graphics
 {

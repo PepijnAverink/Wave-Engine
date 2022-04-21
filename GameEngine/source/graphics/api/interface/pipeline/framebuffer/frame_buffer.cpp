@@ -1,4 +1,5 @@
-#include "./graphics/api/interface/pipeline/framebuffer/frame_buffer.h"
+//#include "./graphics/api/interface/pipeline/framebuffer/frame_buffer.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

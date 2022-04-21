@@ -1,13 +1,12 @@
 #pragma once
-#include "./core/window/window.h"
-
-#include "./graphics/api/interface/render_device.h"
-#include "./graphics/api/interface/object/swapchain/swapchain.h"
-#include "./graphics/api/interface/object/command/command_queue.h"
-
-#include "./graphics/api/interface/object/sync/fence.h"
-#include "./graphics/api/interface/object/command/command_buffer.h"
-
+//#include "./core/window/window.h"
+//
+//#include "./graphics/api/interface/render_device.h"
+//#include "./graphics/api/interface/object/swapchain/swapchain.h"
+//#include "./graphics/api/interface/object/command/command_queue.h"
+//
+//#include "./graphics/api/interface/object/sync/fence.h"
+//#include "./graphics/api/interface/object/command/command_buffer.h"
 namespace Graphics
 {
 	class RendererBackend

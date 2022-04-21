@@ -1,6 +1,7 @@
-#include "./graphics/api/vulkan/resource/shader/vk_shader.h"
-#include "./core/system/file_system.h"
-#include "./core/logger.h"
+//#include "./graphics/api/vulkan/resource/shader/vk_shader.h"
+//#include "./core/system/file_system.h"
+//#include "./core/logger.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

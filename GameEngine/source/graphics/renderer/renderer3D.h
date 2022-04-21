@@ -4,7 +4,7 @@
 #include "./graphics/renderer/material/material_instance.h"
 #include "./graphics/renderer/model/mesh.h"
 
-#include <glm/glm.hpp>
+#include "../dependencies/include/glm/glm.hpp"
 
 namespace Graphics
 {

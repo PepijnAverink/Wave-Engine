@@ -1,17 +1,18 @@
-#include "./graphics/api/vulkan/object/command/vk_command_buffer.h"
-#include "./graphics/api/vulkan/object/command/vk_command_pool.h"
-
-#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_set.h"
-#include "./graphics/api/vulkan/resource/buffer/vk_buffer.h"
-#include "./graphics/api/vulkan/pipeline/layout/vk_input_layout.h"
-#include "./graphics/api/vulkan/pipeline/graphics/vk_graphics_pipeline.h"
-
-
-#include "./graphics/api/vulkan/pipeline/framebuffer/vk_frame_buffer.h"
-#include "./graphics/api/vulkan/resource/texture/vk_texture2D.h"
-#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
-
-#include "./core/logger.h"
+//#include "./graphics/api/vulkan/object/command/vk_command_buffer.h"
+//#include "./graphics/api/vulkan/object/command/vk_command_pool.h"
+//
+//#include "./graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_set.h"
+//#include "./graphics/api/vulkan/resource/buffer/vk_buffer.h"
+//#include "./graphics/api/vulkan/pipeline/layout/vk_input_layout.h"
+//#include "./graphics/api/vulkan/pipeline/graphics/vk_graphics_pipeline.h"
+//
+//
+//#include "./graphics/api/vulkan/pipeline/framebuffer/vk_frame_buffer.h"
+//#include "./graphics/api/vulkan/resource/texture/vk_texture2D.h"
+//#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
+//
+//#include "./core/logger.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

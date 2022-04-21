@@ -1,6 +1,5 @@
 #pragma once
 #include "./graphics/api/interface/object/command/command_buffer_descriptor.h"
-
 namespace Graphics
 {
 	class ViewPort;

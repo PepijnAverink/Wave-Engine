@@ -1,6 +1,6 @@
-#include "./graphics/api/interface/object/swapchain/swapchain.h"
-#include "./core/window/window.h"
-
+//#include "./graphics/api/interface/object/swapchain/swapchain.h"
+//#include "./core/window/window.h"
+#include "core/stdafx.h"
 namespace Graphics
 {
 	Swapchain::Swapchain(const SwapchainDescriptor* _swapchainDescriptor)

@@ -1,8 +1,8 @@
 #pragma once
-#include "./graphics/api/interface/resource/view/texture_view.h"
-#include "./graphics/api/vulkan/vk_render_device.h"
-
-#include "./graphics/api/vulkan/resource/texture/vk_texture2D.h"
+//#include "./graphics/api/interface/resource/view/texture_view.h"
+//#include "./graphics/api/vulkan/vk_render_device.h"
+//
+//#include "./graphics/api/vulkan/resource/texture/vk_texture2D.h"
 
 namespace Graphics
 {

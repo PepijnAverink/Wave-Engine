@@ -1,6 +1,6 @@
 #pragma once
-#include "./graphics/api/interface/resource/texture/texture2D_descriptor.h"
-
+//#include "./graphics/api/interface/resource/texture/texture2D_descriptor.h"
+//#include "./graphics/api/interface/resource/resource_format.h"
 namespace Graphics
 {
 	class Texture2D

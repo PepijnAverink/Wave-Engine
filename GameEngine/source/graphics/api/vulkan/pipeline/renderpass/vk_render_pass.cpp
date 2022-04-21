@@ -1,8 +1,9 @@
-#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
-#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass_load_op.h"
-#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass_store_op.h"
-#include "./graphics/api/vulkan/resource/vk_resource_format.h"
-#include "./graphics/api/vulkan/resource/vk_resource_state.h"
+//#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
+//#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass_load_op.h"
+//#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass_store_op.h"
+//#include "./graphics/api/vulkan/resource/vk_resource_format.h"
+//#include "./graphics/api/vulkan/resource/vk_resource_state.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

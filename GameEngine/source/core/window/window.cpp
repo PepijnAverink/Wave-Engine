@@ -1,6 +1,6 @@
-#include "./core/window/window.h"
-#include "./core/event/window/window_resize_event.h"
-
+//#include "./core/window/window.h"
+//#include "./core/event/window/window_resize_event.h"
+#include "core/stdafx.h"
 // Static forward declare
 static Window* s_Window = nullptr;
 static LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
