@@ -37,6 +37,9 @@ private:
 
 	bool OnWindowCloseEvent();
 	bool OnWindowResizeEvent(WindowResizeEvent& _event);
+	bool OnKeyDownEvent(KeyDownEvent& _event);
+	bool OnKeyUpEvent(KeyUpEvent& _event);
+
 
 	Window* m_Window = nullptr;
 

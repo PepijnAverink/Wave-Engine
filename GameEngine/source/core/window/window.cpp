@@ -129,6 +129,22 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM l
 			}
 			break;
 		}
+		case WM_KEYDOWN:
+		{
+			uint8_t key = static_cast<uint8_t>(wParam);
+			uint32_t info = static_cast<uint32_t>(lParam);
+			KeyDownEvent event = KeyDownEvent(key, info);
+			s_Window->EventCallback(event);
+			break;
+		}
+		case WM_KEYUP:
+		{
+			uint8_t key = static_cast<uint8_t>(wParam);
+			uint32_t info = static_cast<uint32_t>(lParam);
+			KeyUpEvent event = KeyUpEvent(key, info);
+			s_Window->EventCallback(event);
+		}
+
 	}
 	// Handle any messages the switch statement didn't
 	return DefWindowProc(hwnd, message, wParam, lParam);

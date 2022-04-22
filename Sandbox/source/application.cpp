@@ -345,6 +345,8 @@ bool Application::OnEvent(Event& _event)
     // Dispatch Window close event
     EventDispatcher dispatcher(_event);
     dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResizeEvent));
+    dispatcher.Dispatch<KeyDownEvent>(BIND_EVENT_FN(Application::OnKeyDownEvent));
+    dispatcher.Dispatch<KeyUpEvent>(BIND_EVENT_FN(Application::OnKeyUpEvent));
     return false;
 }
 
@@ -366,5 +368,23 @@ bool Application::OnWindowResizeEvent(WindowResizeEvent& _event)
         m_FrameBuffers[i] = m_RenderDevice->CreateFrameBuffer(&frameBufferDesc);
     }
 
+    return true;
+}
+
+bool Application::OnKeyDownEvent(KeyDownEvent& _event)
+{
+    uint8_t key = _event.GetKey();
+    if (key == 'C' && !_event.isPressed())
+        Logger::Log("C was pressed", LOG_TYPE_INFO);
+        //Logger::Log(std::to_string(_event.GetInfo()), LOG_TYPE_INFO);
+    return true;
+}
+
+bool Application::OnKeyUpEvent(KeyUpEvent& _event)
+{
+    uint8_t key = _event.GetKey();
+    if (key == 'F')
+        Logger::Log("F was pressed", LOG_TYPE_INFO);
+    //Logger::Log(std::to_string(_event.GetInfo()), LOG_TYPE_INFO);
     return true;
 }
