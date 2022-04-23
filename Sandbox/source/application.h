@@ -39,6 +39,13 @@ private:
 	bool OnWindowResizeEvent(WindowResizeEvent& _event);
 	bool OnKeyDownEvent(KeyDownEvent& _event);
 	bool OnKeyUpEvent(KeyUpEvent& _event);
+	bool OnMouseMoveEvent(MouseMoveEvent& _event);
+	bool OnMouseLeftDown(MouseLeftDownEvent& _event);
+	bool OnMouseLeftUp(MouseLeftUpEvent& _event);
+	bool OnMouseRightDown(MouseRightDownEvent& _event);
+	bool OnMouseRightUp(MouseRightUpEvent& _event);
+
+
 
 
 	Window* m_Window = nullptr;

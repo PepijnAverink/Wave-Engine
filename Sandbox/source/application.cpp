@@ -347,6 +347,11 @@ bool Application::OnEvent(Event& _event)
     dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResizeEvent));
     dispatcher.Dispatch<KeyDownEvent>(BIND_EVENT_FN(Application::OnKeyDownEvent));
     dispatcher.Dispatch<KeyUpEvent>(BIND_EVENT_FN(Application::OnKeyUpEvent));
+    dispatcher.Dispatch<MouseMoveEvent>(BIND_EVENT_FN(Application::OnMouseMoveEvent));
+    dispatcher.Dispatch<MouseLeftDownEvent>(BIND_EVENT_FN(Application::OnMouseLeftDown));
+    dispatcher.Dispatch<MouseLeftUpEvent>(BIND_EVENT_FN(Application::OnMouseLeftUp));
+    dispatcher.Dispatch<MouseRightDownEvent>(BIND_EVENT_FN(Application::OnMouseRightDown));
+    dispatcher.Dispatch<MouseRightUpEvent>(BIND_EVENT_FN(Application::OnMouseRightUp));
     return false;
 }
 
@@ -373,18 +378,48 @@ bool Application::OnWindowResizeEvent(WindowResizeEvent& _event)
 
 bool Application::OnKeyDownEvent(KeyDownEvent& _event)
 {
-    uint8_t key = _event.GetKey();
-    if (key == 'C' && !_event.isPressed())
-        Logger::Log("C was pressed", LOG_TYPE_INFO);
-        //Logger::Log(std::to_string(_event.GetInfo()), LOG_TYPE_INFO);
+    if (!_event.isPressed())
+    Logger::Log(std::to_string(_event.GetKey()) + " was pressed", LOG_TYPE_INFO);
     return true;
 }
 
 bool Application::OnKeyUpEvent(KeyUpEvent& _event)
 {
-    uint8_t key = _event.GetKey();
-    if (key == 'F')
-        Logger::Log("F was pressed", LOG_TYPE_INFO);
-    //Logger::Log(std::to_string(_event.GetInfo()), LOG_TYPE_INFO);
+    Logger::Log(std::to_string(_event.GetKey()) + " was released", LOG_TYPE_INFO);
+    return true;
+}
+
+bool Application::OnMouseMoveEvent(MouseMoveEvent& _event)
+{
+    Logger::Log(" Mouse Moves to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
+
+    return true;
+}
+
+bool Application::OnMouseLeftDown(MouseLeftDownEvent& _event)
+{
+    Logger::Log(" Left Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
+
+    return true;
+}
+
+bool Application::OnMouseLeftUp(MouseLeftUpEvent& _event)
+{
+    Logger::Log(" Left Up to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
+
+    return true;
+}
+
+bool Application::OnMouseRightDown(MouseRightDownEvent& _event)
+{
+    Logger::Log(" Right Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
+
+    return true;
+}
+
+bool Application::OnMouseRightUp(MouseRightUpEvent& _event)
+{
+    Logger::Log(" Right Up to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
+
     return true;
 }

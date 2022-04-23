@@ -143,7 +143,56 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM l
 			uint32_t info = static_cast<uint32_t>(lParam);
 			KeyUpEvent event = KeyUpEvent(key, info);
 			s_Window->EventCallback(event);
+			break;
 		}
+		case WM_MOUSEMOVE:
+		{
+			int state = 0;
+			if (static_cast<uint8_t>(wParam) == MK_LBUTTON)
+				state = 1;
+			if (static_cast<uint8_t>(wParam) == MK_RBUTTON)
+				state = 2;
+
+				
+			int xPos = LOWORD(lParam);
+			int yPos = HIWORD(lParam);
+			MouseMoveEvent event = MouseMoveEvent(xPos, yPos, state);
+			s_Window->EventCallback(event);
+			break;
+		}
+		case WM_LBUTTONDOWN:
+		{
+			int xPos = LOWORD(lParam);
+			int yPos = HIWORD(lParam);
+			MouseLeftDownEvent event = MouseLeftDownEvent(xPos, yPos);
+			s_Window->EventCallback(event);
+			break;
+		}
+		case WM_LBUTTONUP:
+		{
+			int xPos = LOWORD(lParam);
+			int yPos = HIWORD(lParam);
+			MouseLeftUpEvent event = MouseLeftUpEvent(xPos, yPos);
+			s_Window->EventCallback(event);
+			break;
+		}
+		case WM_RBUTTONDOWN:
+		{
+			int xPos = LOWORD(lParam);
+			int yPos = HIWORD(lParam);
+			MouseRightDownEvent event = MouseRightDownEvent(xPos, yPos);
+			s_Window->EventCallback(event);
+			break;
+		}
+		case WM_RBUTTONUP:
+		{
+			int xPos = LOWORD(lParam);
+			int yPos = HIWORD(lParam);
+			MouseRightUpEvent event = MouseRightUpEvent(xPos, yPos);
+			s_Window->EventCallback(event);
+			break;
+		}
+
 
 	}
 	// Handle any messages the switch statement didn't
