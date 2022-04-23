@@ -18,6 +18,13 @@
 #include "core/event/event_dispatcher.h"
 #include "core/event/event_type.h"
 #include "core/event/window/window_resize_event.h"
+#include "core/event/input/key_down_event.h"
+#include "core/event/input/key_up_event.h"
+#include "core/event/input/mouse_left_down_event.h"
+#include "core/event/input/mouse_left_up_event.h"
+#include "core/event/input/mouse_move_event.h"
+#include "core/event/input/mouse_right_down_event.h"
+#include "core/event/input/mouse_right_up_event.h"
 #include "core/window/window.h"
 
 
