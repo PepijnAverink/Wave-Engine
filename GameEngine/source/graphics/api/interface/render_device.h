@@ -1,9 +1,11 @@
 #pragma once
 #include "./graphics/api/interface/render_device_descriptor.h"
-
+//#include "graphics/api/graphics_api.h"
+//#include "graphics/api/interface/debug_mode.h"
 class Window;
 namespace Graphics
 {
+	class RenderDeviceDescriptor;
 	class CommandPool;
 	class CommandPoolDescriptor;
 	class CommandBuffer;

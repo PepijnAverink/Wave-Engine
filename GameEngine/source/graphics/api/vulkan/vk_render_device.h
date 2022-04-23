@@ -1,11 +1,9 @@
 #pragma once
-#include "./graphics/api/interface/render_device.h"
-#include "./graphics/api/interface/object/command/command_queue_type.h"
+//#include "./graphics/api/interface/render_device.h"
+//#include "./graphics/api/interface/object/command/command_queue_type.h"
 
 // If running on windows define windows specific VK implementation
-#if defined(_WIN32)
-#define VK_USE_PLATFORM_WIN32_KHR
-#endif
+
 #include <vulkan/vulkan.h>
 
 

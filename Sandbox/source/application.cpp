@@ -1,9 +1,9 @@
-#include "./application.h"
-#include "./core/event/event_dispatcher.h"
-
+//#include "./application.h"
+//#include "./core/event/event_dispatcher.h"
+//
 #include <../../GameEngine/dependencies/include/glm/glm.hpp>
 #include <../../GameEngine/dependencies/include/glm/gtc/matrix_transform.hpp>
-
+#include "stdafx.h"
 struct UniformBufferObject {
     glm::mat4 view;
     glm::mat4 proj;
@@ -11,12 +11,15 @@ struct UniformBufferObject {
 
 glm::mat4 model;
 
-struct Vertex {
-    float pos[2];
-    float color[3];
-};
+namespace App{
+    struct Vertex {
+        float pos[2];
+        float color[3];
+    };
+}
 
-std::vector<Vertex> vertices = {
+
+std::vector<App::Vertex> vertices = {
     {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
     {{0.5f, -0.5f }, {0.0f, 1.0f, 0.0f}},
     {{0.5f, 0.5f  }, {0.0f, 0.0f, 1.0f}},

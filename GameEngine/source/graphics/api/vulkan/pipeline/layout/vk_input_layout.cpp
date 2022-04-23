@@ -1,6 +1,7 @@
-#include "./graphics/api/vulkan/pipeline/layout/vk_input_layout.h"
-#include "./graphics/api/vulkan/pipeline/layout/vk_input_type.h"
-#include "./graphics/api/vulkan/resource/shader/vk_shader_type_flags.h"
+//#include "./graphics/api/vulkan/pipeline/layout/vk_input_layout.h"
+//#include "./graphics/api/vulkan/pipeline/layout/vk_input_type.h"
+//#include "./graphics/api/vulkan/resource/shader/vk_shader_type_flags.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

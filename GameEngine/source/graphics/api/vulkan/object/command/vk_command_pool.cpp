@@ -1,5 +1,6 @@
-#include "./graphics/api/vulkan/object/command/vk_command_pool.h"
-#include "./core/logger.h"
+//#include "./graphics/api/vulkan/object/command/vk_command_pool.h"
+//#include "./core/logger.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

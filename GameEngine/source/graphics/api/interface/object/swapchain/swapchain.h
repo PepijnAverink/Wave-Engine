@@ -1,6 +1,6 @@
 #pragma once
-#include "./graphics/api/interface/object/swapchain/swapchain_descriptor.h"
-
+//#include "./graphics/api/interface/object/swapchain/swapchain_descriptor.h"
+#include "graphics/api/interface/resource/resource_format.h"
 #include <vector>
 
 namespace Graphics

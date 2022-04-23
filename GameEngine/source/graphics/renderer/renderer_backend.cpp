@@ -1,5 +1,5 @@
-#include "./graphics/renderer/renderer_backend.h"
-
+//#include "./graphics/renderer/renderer_backend.h"
+#include "core/stdafx.h"
 namespace Graphics
 {
 	// Static instance

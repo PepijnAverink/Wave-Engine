@@ -1,5 +1,6 @@
-#include "./graphics/api/vulkan/resource/view/vk_texture_view.h"
-#include "./graphics/api/vulkan/resource/vk_resource_format.h"
+//#include "./graphics/api/vulkan/resource/view/vk_texture_view.h"
+//#include "./graphics/api/vulkan/resource/vk_resource_format.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

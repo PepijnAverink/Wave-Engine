@@ -1,7 +1,7 @@
-#include "./graphics/api/vulkan/pipeline/framebuffer/vk_frame_buffer.h"
-#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
-#include "./graphics/api/vulkan/resource/view/vk_texture_view.h"
-
+//#include "./graphics/api/vulkan/pipeline/framebuffer/vk_frame_buffer.h"
+//#include "./graphics/api/vulkan/pipeline/renderpass/vk_render_pass.h"
+//#include "./graphics/api/vulkan/resource/view/vk_texture_view.h"
+#include "core/stdafx.h"
 namespace Graphics
 {
 	VKFrameBuffer::VKFrameBuffer(VKRenderDevice* _renderDevice, const FrameBufferDescriptor* _frameBufferDescriptor)

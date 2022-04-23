@@ -1,10 +1,5 @@
-#include "./core/system/file_system.h"
-#include "./utility/hash_utility.h"
+#include "core/stdafx.h"
 
-#include <fstream>
-#include <streambuf>
-
-#include <windows.h>
 
 // No system mounting nessecary on windows
 bool  FileSystem::MountFilesystem(const std::string& _contentpath) { return true; }

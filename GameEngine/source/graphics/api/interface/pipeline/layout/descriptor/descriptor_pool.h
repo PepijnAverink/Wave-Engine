@@ -1,6 +1,6 @@
 #pragma once
-#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_pool_descriptor.h"
-#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_set.h"
+//#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_pool_descriptor.h"
+//#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_set.h"
 
 namespace Graphics
 {

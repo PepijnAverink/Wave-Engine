@@ -1,5 +1,5 @@
 #pragma once
-#include "./graphics/renderer/material/material.h"
+//#include "./graphics/renderer/material/material.h"
 
 namespace Graphics
 {

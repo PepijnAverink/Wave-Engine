@@ -1,7 +1,8 @@
-#include "./graphics/api/interface/render_device.h"
-#include "./graphics/api/vulkan/vk_render_device.h"
-
-#include "./core/logger.h"
+//#include "./graphics/api/interface/render_device.h"
+//#include "./graphics/api/vulkan/vk_render_device.h"
+//
+//#include "./core/logger.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

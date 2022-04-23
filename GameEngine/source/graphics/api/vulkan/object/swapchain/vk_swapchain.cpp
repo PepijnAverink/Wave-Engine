@@ -1,15 +1,16 @@
-#include "./graphics/api/vulkan/object/swapchain/vk_swapchain.h"
-#include "./graphics/api/vulkan/object/command/vk_command_queue.h"
-#include "./core/window/window.h"
-
-#include "./graphics/api/vulkan/resource/texture/vk_texture2D.h"
-#include "./graphics/api/vulkan/resource/view/vk_texture_view.h"
-#include "./graphics/api/vulkan/resource/vk_resource_format.h"
-
-#include "./graphics/api/vulkan/object/sync/vk_fence.h"
-
-#include <vector>
-#include <algorithm>
+//#include "./graphics/api/vulkan/object/swapchain/vk_swapchain.h"
+//#include "./graphics/api/vulkan/object/command/vk_command_queue.h"
+//#include "./core/window/window.h"
+//
+//#include "./graphics/api/vulkan/resource/texture/vk_texture2D.h"
+//#include "./graphics/api/vulkan/resource/view/vk_texture_view.h"
+//#include "./graphics/api/vulkan/resource/vk_resource_format.h"
+//
+//#include "./graphics/api/vulkan/object/sync/vk_fence.h"
+//
+//#include <vector>
+//#include <algorithm>
+#include "core/stdafx.h"
 
 namespace Graphics
 {

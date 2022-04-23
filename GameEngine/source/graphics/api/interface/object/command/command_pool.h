@@ -3,6 +3,7 @@
 
 namespace Graphics
 {
+    
 	class CommandPool
 	{
 	public:

@@ -1,4 +1,5 @@
-#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_set.h"
+//#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_set.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

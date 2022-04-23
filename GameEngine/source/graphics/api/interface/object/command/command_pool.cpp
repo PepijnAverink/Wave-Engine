@@ -1,4 +1,5 @@
-#include "./graphics/api/interface/object/command/command_pool.h"
+//#include "./graphics/api/interface/object/command/command_pool.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

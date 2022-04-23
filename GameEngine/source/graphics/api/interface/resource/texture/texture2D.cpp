@@ -1,4 +1,5 @@
-#include "./graphics/api/interface/resource/texture/texture2D.h"
+//#include "./graphics/api/interface/resource/texture/texture2D.h"
+#include "core/stdafx.h"
 
 namespace Graphics
 {

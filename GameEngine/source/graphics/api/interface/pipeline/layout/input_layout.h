@@ -1,10 +1,11 @@
 #pragma once
-#include "./graphics/api/interface/pipeline/layout/input_layout_descriptor.h"
+//#include "./graphics/api/interface/pipeline/layout/input_layout_descriptor.h"
 
 #include <vector>
 
 namespace Graphics
 {
+	class InputSet;
 	class InputLayout
 	{
 	public:
