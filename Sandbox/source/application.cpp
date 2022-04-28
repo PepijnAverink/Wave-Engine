@@ -118,7 +118,7 @@ void Application::OnInitialize()
     // VertexShader
     ShaderDescriptor shaderDesc = {};
     shaderDesc.Name = "VertexShader";
-    shaderDesc.Filepath = "../GameEngine/assets/vert.spv";
+    shaderDesc.Filepath = "../GameEngine/assets/vs.vert.spv";
     shaderDesc.EntryPoint = "main";
     shaderDesc.Type = Graphics::ShaderType::SHADER_TYPE_VERTEX;
 
@@ -126,7 +126,7 @@ void Application::OnInitialize()
 
     // PixelShader
     shaderDesc.Name = "PixelShader";
-    shaderDesc.Filepath = "../GameEngine/assets/frag.spv";
+    shaderDesc.Filepath = "../GameEngine/assets/fs.frag.spv";
     shaderDesc.EntryPoint = "main";
     shaderDesc.Type = Graphics::ShaderType::SHADER_TYPE_PIXEL;
 
