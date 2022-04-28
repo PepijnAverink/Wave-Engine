@@ -2,17 +2,16 @@
 
 #include <fstream>
 #include <streambuf>
-
 #include <windows.h>
 #include <string>
 #include <vector>
 #include <algorithm>
-
 #include <iostream>
 #include <optional>
 #include <set>
 
 #include "core/logger.h"
+#include "core/performance/timer.h"
 #include "core/event/event.h"
 #include "core/event/event_category.h"
 #include "core/event/event_dispatcher.h"
@@ -177,7 +176,7 @@
 #include "graphics/api/vulkan/pipeline/renderpass/vk_render_pass_load_op.h"
 #include "graphics/api/vulkan/pipeline/renderpass/vk_render_pass_store_op.h"
 
-
+#include "graphics/renderer/camera/camera.h"
 
 #include "graphics/renderer/material/material.h"
 #include "graphics/renderer/material/material_instance.h"
