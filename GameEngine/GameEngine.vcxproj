@@ -343,6 +343,8 @@
     <ClCompile Include="source\graphics\api\vulkan\vk_render_device.cpp" />
     <ClCompile Include="source\graphics\renderer\material\material.cpp" />
     <ClCompile Include="source\graphics\renderer\material\material_instance.cpp" />
+    <ClCompile Include="source\graphics\renderer\model\default\quad.cpp" />
+    <ClCompile Include="source\graphics\renderer\model\mesh.cpp" />
     <ClCompile Include="source\graphics\renderer\renderer3D.cpp" />
     <ClCompile Include="source\graphics\renderer\renderer_backend.cpp" />
     <ClCompile Include="source\core\stdafx.cpp">

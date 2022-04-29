@@ -21,6 +21,8 @@
 //
 //#include "./core/event/window/window_resize_event.h"
 
+#include "./graphics/renderer/model/mesh.h"
+
 using namespace Graphics;
 class Application
 {
@@ -50,10 +52,6 @@ private:
 
 	Window* m_Window = nullptr;
 
-	RenderDevice* m_RenderDevice = nullptr;
-	Swapchain* m_Swapchain = nullptr;
-
-	CommandQueue* m_CommandQueue = nullptr;
 	CommandBuffer* m_CommandBuffer = nullptr;
 	CommandPool* m_CommandPool = nullptr;
 
@@ -65,9 +63,9 @@ private:
 	GraphicsPipeline* m_GraphicsPipeline = nullptr;
 	InputLayout* m_InputLayout = nullptr;
 
-	Buffer* m_VertexBuffer = nullptr;
-	Buffer* m_IndexBuffer = nullptr;
+	Mesh* m_Mesh = nullptr;
 
+	RendererBackend* m_RenderBackend = nullptr;
 
 	DescriptorPool* m_DescriptorPool = nullptr;
 	DescriptorSet* m_DescriptorSet = nullptr;

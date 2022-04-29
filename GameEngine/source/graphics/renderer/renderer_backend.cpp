@@ -21,6 +21,38 @@ namespace Graphics
 		s_RenderBackend->m_CommandQueue->SubmitCommandBuffer(_commandBuffer, _fence);
 	}
 
+	uint32_t RendererBackend::AquireNewFrame(Fence* _fence)
+	{
+		return s_RenderBackend->m_Swapchain->AquireNewImage(s_RenderBackend->m_CommandQueue, _fence);
+	}
+
+	void RendererBackend::Present()
+	{
+		s_RenderBackend->m_Swapchain->Present(s_RenderBackend->m_CommandQueue);
+	}
+
+	void RendererBackend::Resize(const uint32_t _width, const uint32_t _height)
+	{
+		s_RenderBackend->m_Swapchain->Resize(s_RenderBackend->m_CommandQueue, _width, _height);
+		s_RenderBackend->m_ClientWidth  = s_RenderBackend->m_Swapchain->GetWidth();
+		s_RenderBackend->m_ClientHeight = s_RenderBackend->m_Swapchain->GetHeight();
+	}
+
+	uint32_t RendererBackend::GetClientWidth()
+	{
+		return s_RenderBackend->m_ClientWidth;
+	}
+
+	uint32_t RendererBackend::GetClientHeight()
+	{
+		return s_RenderBackend->m_ClientHeight;
+	}
+
+	uint32_t RendererBackend::GetBackbufferCount()
+	{
+		return s_RenderBackend->m_BackbufferCount;
+	}
+
 	RendererBackend::RendererBackend(Window* _window)
 	{
 		// RenderDevice
@@ -48,7 +80,11 @@ namespace Graphics
 		swapchainDesc.Width  = _window->GetWidth();
 		swapchainDesc.Height = _window->GetHeight();
 
-		m_Swapchain = m_RenderDevice->CreateSwapchain(m_CommandQueue, &swapchainDesc);
+		// Create swapchain and query dimensions
+		m_Swapchain    = m_RenderDevice->CreateSwapchain(m_CommandQueue, &swapchainDesc);
+		m_ClientWidth  = m_Swapchain->GetWidth();
+		m_ClientHeight = m_Swapchain->GetHeight();
+		m_BackbufferCount = m_Swapchain->GetBufferCount();
 	}
 
 	RendererBackend::~RendererBackend()
