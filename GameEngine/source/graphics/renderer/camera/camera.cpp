@@ -1,8 +1,8 @@
 #include "core/stdafx.h"
 
 
-Camera::Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed, float sensitivity)
-: m_Position(pos), m_LookAt(lookAt), m_Speed(speed), m_Sensitivity(sensitivity)
+Camera::Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed, float sensitivity, float yaw)
+: m_Position(pos), m_LookAt(lookAt), m_Speed(speed), m_Sensitivity(sensitivity), m_Yaw(yaw)
 {
 	m_ViewDirection = glm::normalize(m_Position - m_LookAt);
 	m_Up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -29,21 +29,22 @@ void Camera::ApplyTranslation(float delta)
 
 void Camera::ApplyRotation(float delta)
 {
-	m_Pitch *=  m_Sensitivity;
-	m_Yaw *= m_Sensitivity;
+	m_Pitch *=  m_Sensitivity * 0.0f;
+	float yaw = m_Yaw * m_Sensitivity;
+	Logger::Log(std::to_string(m_Yaw), LOG_TYPE_INFO);
 	if (m_Pitch > static_cast<float>(MAX_PITCH))
 		m_Pitch = static_cast<float>(MAX_PITCH);
 	if (m_Pitch < -static_cast<float>(MAX_PITCH))
 		m_Pitch = -static_cast<float>(MAX_PITCH);
 
 	m_ViewDirection = glm::vec3(
-		cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch)),
+		cos(glm::radians(90 - m_Yaw)) * cos(glm::radians(m_Pitch)),
 		sin(glm::radians(m_Pitch)),
-		sin(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch))
+		sin(glm::radians(90 - m_Yaw)) * cos(glm::radians(m_Pitch))
 	);
-	m_LookAt = m_Position + m_ViewDirection;
-	m_Right = glm::normalize(glm::cross(m_ViewDirection, glm::vec3(0.0f, 1.0f, 0.0)));
-	m_Up = glm::normalize(glm::cross(m_Right, m_ViewDirection));
+	m_LookAt = m_Position - m_ViewDirection;
+	m_Right = -glm::normalize(glm::cross(m_ViewDirection, glm::vec3(0.0f, 1.0f, 0.0)));
+	m_Up = -glm::normalize(glm::cross(m_Right, m_ViewDirection));
 	UpdateViewMatrix();
 	m_IsRotationDirty = false;
 }

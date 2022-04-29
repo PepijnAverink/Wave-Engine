@@ -328,7 +328,7 @@ void Application::OnUpdate()
     {
         if (m_Camera->HasRotationChanged())
             m_Camera->ApplyRotation(elapsedTime);
-       /* if (m_Camera->HasTranslationChanged())
+        /*if (m_Camera->HasTranslationChanged())
             m_Camera->ApplyTranslation(elapsedTime);*/
        
         m_VP.view = m_Camera->GetViewMatrix();
@@ -480,11 +480,16 @@ bool Application::OnMouseMoveEvent(MouseMoveEvent& _event)
             m_MouseY = _event.GetY();
             m_FirstMouse = false;
         }
-        int xOffset = _event.GetX() - m_MouseX;
-        int yOffset = _event.GetY() - m_MouseY;
-        m_MouseX = _event.GetX();
-        m_MouseY = _event.GetY();
-        m_Camera->Rotate(xOffset, yOffset);
+        else
+        {
+            int xOffset = _event.GetX() - m_MouseX;
+            int yOffset =  m_MouseY - _event.GetY() ;
+            m_MouseX = _event.GetX();
+            m_MouseY = _event.GetY();
+            m_Camera->Rotate(xOffset, yOffset);
+            Logger::Log(std::to_string(xOffset), LOG_TYPE_INFO);
+        }
+        
     }
     //Logger::Log(" Mouse Moves to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 

@@ -7,7 +7,7 @@ class Camera
 {
 public:
 
-	Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed = 5.0f, float sensitivity = 0.1f);
+	Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed = 20.0f, float sensitivity = 0.1f, float yaw = -90.0f);
 		
 
 	void UpdateViewMatrix()
@@ -47,7 +47,7 @@ public:
 
 	inline void Rotate(int _x, int _y)
 	{
-		m_Yaw += _x;
+		m_Yaw += static_cast<float>(_x);
 		m_Pitch += _y;
 		m_IsRotationDirty = true;
 	}
@@ -83,7 +83,7 @@ protected:
 	const static int MAX_PITCH = 89;
 
 	glm::vec3 m_ApplyTranslation = glm::vec3(0.0f, 0.0f, 0.0f);
-	float m_Yaw = -90.0f;
+	float m_Yaw;
 	float m_Pitch = 0.0f;
 	bool m_IsTranslationDirty, m_IsRotationDirty;
 	glm::mat4 m_ViewMatrix;
