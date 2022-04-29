@@ -29,18 +29,18 @@ void Camera::ApplyTranslation(float delta)
 
 void Camera::ApplyRotation(float delta)
 {
-	m_Pitch *=  m_Sensitivity * 0.0f;
+	float pitch =  m_Sensitivity * m_Pitch;
 	float yaw = m_Yaw * m_Sensitivity;
-	Logger::Log(std::to_string(m_Yaw), LOG_TYPE_INFO);
-	if (m_Pitch > static_cast<float>(MAX_PITCH))
+	//Logger::Log(std::to_string(m_Yaw), LOG_TYPE_INFO);
+	/*if (m_Pitch > static_cast<float>(MAX_PITCH))
 		m_Pitch = static_cast<float>(MAX_PITCH);
 	if (m_Pitch < -static_cast<float>(MAX_PITCH))
-		m_Pitch = -static_cast<float>(MAX_PITCH);
+		m_Pitch = -static_cast<float>(MAX_PITCH);*/
 
 	m_ViewDirection = glm::vec3(
-		cos(glm::radians(90 - m_Yaw)) * cos(glm::radians(m_Pitch)),
-		sin(glm::radians(m_Pitch)),
-		sin(glm::radians(90 - m_Yaw)) * cos(glm::radians(m_Pitch))
+		cos(glm::radians(90 - yaw)) * cos(glm::radians(pitch)),
+		sin(glm::radians(pitch)),
+		sin(glm::radians(90 - yaw)) * cos(glm::radians(pitch))
 	);
 	m_LookAt = m_Position - m_ViewDirection;
 	m_Right = -glm::normalize(glm::cross(m_ViewDirection, glm::vec3(0.0f, 1.0f, 0.0)));

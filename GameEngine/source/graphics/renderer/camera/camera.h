@@ -47,7 +47,7 @@ public:
 
 	inline void Rotate(int _x, int _y)
 	{
-		m_Yaw += static_cast<float>(_x);
+		m_Yaw += _x;
 		m_Pitch += _y;
 		m_IsRotationDirty = true;
 	}

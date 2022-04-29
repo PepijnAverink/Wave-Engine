@@ -22,10 +22,10 @@ std::vector<App::Vertex> vertices = {
     {{0.5f, 0.5f, 0.5f  }, {0.0f, 0.0f, 1.0f}},
     {{-0.5f, 0.5f, 0.5f }, {1.0f, 1.0f, 1.0f}},
     ////back
-    { {-1.0f, -1.0f, -1.0f}, {1.0f, 0.0f, 0.0f}},
-    {{1.0f, -1.0f, -1.0f }, {0.0f, 1.0f, 0.0f}},
-    {{1.0f, 1.0f, -1.0f  }, {0.0f, 0.0f, 1.0f}},
-    {{-1.0f, 1.0f, -1.0f }, {1.0f, 1.0f, 1.0f}}
+    { {-0.5f, -0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+    {{0.5f, -0.5f, -0.5f }, {0.0f, 1.0f, 0.0f}},
+    {{0.5f, 0.5f, -0.5f  }, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f, 0.5f, -0.5f }, {1.0f, 1.0f, 1.0f}}
 };
 
 std::vector<uint16_t> indices = {
@@ -328,8 +328,8 @@ void Application::OnUpdate()
     {
         if (m_Camera->HasRotationChanged())
             m_Camera->ApplyRotation(elapsedTime);
-        /*if (m_Camera->HasTranslationChanged())
-            m_Camera->ApplyTranslation(elapsedTime);*/
+        if (m_Camera->HasTranslationChanged())
+            m_Camera->ApplyTranslation(elapsedTime);
        
         m_VP.view = m_Camera->GetViewMatrix();
         m_UniformBuffer->SetData(&m_VP, sizeof(UniformBufferObject));
@@ -482,12 +482,12 @@ bool Application::OnMouseMoveEvent(MouseMoveEvent& _event)
         }
         else
         {
-            int xOffset = _event.GetX() - m_MouseX;
-            int yOffset =  m_MouseY - _event.GetY() ;
+            int xOffset =  m_MouseX - _event.GetX();
+            int yOffset =  _event.GetY() - m_MouseY;
             m_MouseX = _event.GetX();
             m_MouseY = _event.GetY();
             m_Camera->Rotate(xOffset, yOffset);
-            Logger::Log(std::to_string(xOffset), LOG_TYPE_INFO);
+            //Logger::Log(std::to_string(xOffset), LOG_TYPE_INFO);
         }
         
     }
