@@ -7,7 +7,7 @@ class Camera
 {
 public:
 
-	Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed = 20.0f, float sensitivity = 0.1f, float yaw = -90.0f);
+	Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed = 20.0f, float sensitivity = 0.1f, float yaw = 0.0f);
 		
 
 	void UpdateViewMatrix()
