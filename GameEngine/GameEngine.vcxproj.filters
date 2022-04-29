@@ -135,6 +135,9 @@
     <ClCompile Include="source\core\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\graphics\renderer\camera\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\core\window\window.h">
@@ -492,6 +495,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\core\event\input\mouse_right_up_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\core\performance\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\graphics\renderer\camera\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

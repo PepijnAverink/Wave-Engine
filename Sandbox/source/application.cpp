@@ -56,6 +56,7 @@ void Application::OnInitialize()
     m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
     m_Window->Show();
 
+
     // Graphics
     // --------------------------------
     RenderDeviceDescriptor renderDeviceDesc;
@@ -268,6 +269,9 @@ void Application::OnInitialize()
     m_DescriptorSet = m_DescriptorPool->AllocateDescriptorSet(&setDesc);
 
     m_DescriptorSet->AllocateDescriptor(m_UniformBuffer, 0, 0);
+
+    m_MouseX = 0.5 * m_Window->GetWidth();
+    m_MouseY = 0.5 * m_Window->GetHeight();
 }
 
 void Application::OnTerminate()
@@ -322,9 +326,11 @@ void Application::OnUpdate()
     // Update Camera
     if (m_Camera->HasChanged())
     {
-        m_Camera->ApplyTranslation(elapsedTime);
-        //m_Camera.ApplyRotation(elapsedTime);
-       // m_Camera->UpdateViewMatrix();
+        if (m_Camera->HasRotationChanged())
+            m_Camera->ApplyRotation(elapsedTime);
+       /* if (m_Camera->HasTranslationChanged())
+            m_Camera->ApplyTranslation(elapsedTime);*/
+       
         m_VP.view = m_Camera->GetViewMatrix();
         m_UniformBuffer->SetData(&m_VP, sizeof(UniformBufferObject));
     }
@@ -466,6 +472,20 @@ bool Application::OnKeyUpEvent(KeyUpEvent& _event)
 
 bool Application::OnMouseMoveEvent(MouseMoveEvent& _event)
 {
+    if (_event.GetState() == MouseMoveEvent::State::LEFT_BUTTON)
+    {
+        if (m_FirstMouse)
+        {
+            m_MouseX = _event.GetX();
+            m_MouseY = _event.GetY();
+            m_FirstMouse = false;
+        }
+        int xOffset = _event.GetX() - m_MouseX;
+        int yOffset = _event.GetY() - m_MouseY;
+        m_MouseX = _event.GetX();
+        m_MouseY = _event.GetY();
+        m_Camera->Rotate(xOffset, yOffset);
+    }
     //Logger::Log(" Mouse Moves to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
@@ -481,7 +501,7 @@ bool Application::OnMouseLeftDown(MouseLeftDownEvent& _event)
 bool Application::OnMouseLeftUp(MouseLeftUpEvent& _event)
 {
     //Logger::Log(" Left Up to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
-
+    m_FirstMouse = true;
     return true;
 }
 

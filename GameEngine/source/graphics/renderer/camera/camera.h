@@ -7,73 +7,58 @@ class Camera
 {
 public:
 
-	Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed = 5.0f, float sensitivity = 0.1f)
-		: m_Position(pos), m_LookAt(lookAt), m_Speed(speed), m_Sensitivity(sensitivity)
-	{
-		m_ViewDirection = glm::normalize(m_Position - m_LookAt);
-		m_Up = glm::vec3(0.0f, 1.0f, 0.0f);
-		m_Right = -glm::normalize(glm::cross(m_ViewDirection, m_Up));
-		m_Up = -glm::normalize(glm::cross(m_Right, m_ViewDirection));
-		m_ViewMatrix = glm::lookAt(m_Position, m_LookAt, m_Up);
-		m_IsDirty = false;
-	}
+	Camera(const glm::vec3& pos, const glm::vec3& lookAt, float speed = 5.0f, float sensitivity = 0.1f);
+		
 
 	void UpdateViewMatrix()
 	{
-		if (m_IsDirty)
-		{
-			m_ViewDirection = glm::normalize(m_Position - m_LookAt);
-			m_Up = glm::vec3(0.0f, 1.0f, 0.0f);
-			m_Right = -glm::normalize(glm::cross(m_ViewDirection, m_Up));
-			m_Up = -glm::normalize(glm::cross(m_Right, m_ViewDirection));
-			m_ViewMatrix = glm::lookAt(m_Position, m_LookAt, m_Up);
-			m_IsDirty = false;
-		}
+		m_ViewMatrix = glm::lookAt(m_Position, m_LookAt, m_Up);
 		
 	}
 
-	void MoveForward() 
+	inline void MoveForward() 
 	{	
 	
 		m_ApplyTranslation -= m_ViewDirection;
-		m_IsDirty = true;
+		m_IsTranslationDirty = true;
 	}
 
-	void MoveBackward()
+	inline void MoveBackward()
 	{
 
 		m_ApplyTranslation += m_ViewDirection;
-		m_IsDirty = true;
+		m_IsTranslationDirty = true;
 
 	}
 
-	void MoveLeft()
+	inline void MoveLeft()
 	{
 		m_ApplyTranslation -= m_Right;
-		m_IsDirty = true;
+		m_IsTranslationDirty = true;
 
 	}
 
-	void MoveRight()
+	inline void MoveRight()
 	{
 		m_ApplyTranslation += m_Right;
-		m_IsDirty = true;
+		m_IsTranslationDirty = true;
 
 	}
 
-	void ApplyTranslation(float delta)
+	inline void Rotate(int _x, int _y)
 	{
-		m_Position += m_ApplyTranslation * delta * m_Speed;
-		m_ViewMatrix[3][0] = -glm::dot(m_Right, m_Position);
-		m_ViewMatrix[3][1] = -glm::dot(m_Up, m_Position);
-		m_ViewMatrix[3][2] = -glm::dot(m_ViewDirection, m_Position);
-		m_IsDirty = false;
-		//m_LookAt += m_ApplyTranslation * delta * m_Speed;
+		m_Yaw += _x;
+		m_Pitch += _y;
+		m_IsRotationDirty = true;
 	}
 
-	bool HasChanged() { return m_IsDirty; }
-
-	glm::mat4 GetViewMatrix() { return m_ViewMatrix; }
+	void ApplyRotation(float delta);
+	void ApplyTranslation(float delta);
+	
+	inline bool HasChanged() { return m_IsRotationDirty || m_IsTranslationDirty; }
+	inline bool HasRotationChanged() { return m_IsRotationDirty; }
+	inline bool HasTranslationChanged() { return m_IsTranslationDirty; }
+ 	inline glm::mat4 GetViewMatrix() { return m_ViewMatrix; }
 	glm::mat4 GetProjectionMatrix() { return m_ProjectionMatrix; }
 	glm::vec3 GetPosition() { return m_Position; }
 	glm::vec3 getLookAt() { return m_LookAt; }
@@ -82,10 +67,11 @@ public:
 	glm::vec3 getRightVector() { return m_Right; }
 
 	
+	// TODO Fix the corresponding camera vectors
 	void SetProjectionMatrix(const glm::mat4& projection) { m_ProjectionMatrix = projection; }
-	void SetPosition(const glm::vec3& pos) { m_Position = pos; m_IsDirty = true; }
-	void SetLookAt(const glm::vec3& lookAt) { m_LookAt = lookAt; m_IsDirty = true; }
-	void SetViewDirection(const glm::vec3& viewDirection) { m_ViewDirection = viewDirection; m_IsDirty = true; }
+	void SetPosition(const glm::vec3& pos) { m_Position = pos; }
+	void SetLookAt(const glm::vec3& lookAt) { m_LookAt = lookAt;  }
+	void SetViewDirection(const glm::vec3& viewDirection) { m_ViewDirection = viewDirection; }
 	
 
 
@@ -94,10 +80,12 @@ protected:
 
 	float m_Speed;
 	float m_Sensitivity;
+	const static int MAX_PITCH = 89;
 
 	glm::vec3 m_ApplyTranslation = glm::vec3(0.0f, 0.0f, 0.0f);
-
-	bool m_IsDirty;
+	float m_Yaw = -90.0f;
+	float m_Pitch = 0.0f;
+	bool m_IsTranslationDirty, m_IsRotationDirty;
 	glm::mat4 m_ViewMatrix;
 	glm::mat4 m_ProjectionMatrix;
 	glm::vec3 m_Position;

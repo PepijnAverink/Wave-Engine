@@ -341,6 +341,7 @@
     <ClCompile Include="source\graphics\api\vulkan\resource\texture\vk_texture2D.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\resource\view\vk_texture_view.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\vk_render_device.cpp" />
+    <ClCompile Include="source\graphics\renderer\camera\camera.cpp" />
     <ClCompile Include="source\graphics\renderer\material\material.cpp" />
     <ClCompile Include="source\graphics\renderer\material\material_instance.cpp" />
     <ClCompile Include="source\graphics\renderer\renderer3D.cpp" />

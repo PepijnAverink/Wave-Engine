@@ -86,4 +86,7 @@ private:
 		glm::mat4 view;
 		glm::mat4 proj;
 	}m_VP;
+
+	int m_MouseX, m_MouseY;
+	bool m_FirstMouse = true;
 };
