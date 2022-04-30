@@ -59,7 +59,7 @@ public:
 	inline bool HasRotationChanged() { return m_IsRotationDirty; }
 	inline bool HasTranslationChanged() { return m_IsTranslationDirty; }
  	inline glm::mat4 GetViewMatrix() { return m_ViewMatrix; }
-	glm::mat4 GetProjectionMatrix() { return m_ProjectionMatrix; }
+	inline glm::mat4 GetProjectionMatrix() { return m_ProjectionMatrix; }
 	glm::vec3 GetPosition() { return m_Position; }
 	glm::vec3 getLookAt() { return m_LookAt; }
 	glm::vec3 getViewDirection() { return m_ViewDirection; }

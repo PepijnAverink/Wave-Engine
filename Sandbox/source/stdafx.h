@@ -192,6 +192,9 @@
 #include "utility/version.h"
 
 #include "graphics/renderer/camera/camera.h"
+#include "graphics/renderer/camera/perspective.h"
+#include "graphics/renderer/camera/orthographic.h"
+
 
 
 

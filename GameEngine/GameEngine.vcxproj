@@ -467,6 +467,8 @@
     <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_state.h" />
     <ClInclude Include="source\graphics\api\vulkan\vk_render_device.h" />
     <ClInclude Include="source\graphics\renderer\camera\camera.h" />
+    <ClInclude Include="source\graphics\renderer\camera\orthographic.h" />
+    <ClInclude Include="source\graphics\renderer\camera\perspective.h" />
     <ClInclude Include="source\graphics\renderer\material\material.h" />
     <ClInclude Include="source\graphics\renderer\material\material_instance.h" />
     <ClInclude Include="source\graphics\renderer\model\default\quad.h" />

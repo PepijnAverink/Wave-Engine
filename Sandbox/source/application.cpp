@@ -239,9 +239,12 @@ void Application::OnInitialize()
 
    
     model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-    m_Camera = new Camera(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+    /*m_Camera = new Perspective(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        45.0f, 0.1f, 100.0f, m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight());*/
+    m_Camera = new Orthographic(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec2(-5.0f, 5.0f), glm::vec2(-5.0f, 5.0f), glm::vec2(0.1f, 10.0f));
     m_VP.view = m_Camera->GetViewMatrix();/*glm::lookAt(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));*/
-    m_VP.proj = glm::perspective(glm::radians(45.0f), m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight(), 0.1f, 100.0f);
+    m_VP.proj = m_Camera->GetProjectionMatrix();
     m_VP.proj[1][1] *= -1;
 
     bufferDesc = {};

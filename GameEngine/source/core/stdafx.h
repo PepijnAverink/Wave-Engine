@@ -177,6 +177,8 @@
 #include "graphics/api/vulkan/pipeline/renderpass/vk_render_pass_store_op.h"
 
 #include "graphics/renderer/camera/camera.h"
+#include "graphics/renderer/camera/perspective.h"
+#include "graphics/renderer/camera/orthographic.h"
 
 #include "graphics/renderer/material/material.h"
 #include "graphics/renderer/material/material_instance.h"

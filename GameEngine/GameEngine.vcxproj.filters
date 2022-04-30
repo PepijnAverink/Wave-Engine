@@ -503,5 +503,11 @@
     <ClInclude Include="source\graphics\renderer\camera\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\graphics\renderer\camera\perspective.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\graphics\renderer\camera\orthographic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
