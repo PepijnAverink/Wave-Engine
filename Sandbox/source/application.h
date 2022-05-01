@@ -72,4 +72,6 @@ private:
 	DescriptorPool* m_DescriptorPool = nullptr;
 	DescriptorSet* m_DescriptorSet = nullptr;
 	Buffer* m_UniformBuffer = nullptr;
+
+	VKImguiState* m_ImguiState = nullptr;
 };

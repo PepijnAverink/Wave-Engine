@@ -248,10 +248,13 @@ void Application::OnInitialize()
     m_DescriptorSet = m_DescriptorPool->AllocateDescriptorSet(&setDesc);
 
     m_DescriptorSet->AllocateDescriptor(m_UniformBuffer, 0, 0);
+
+    m_ImguiState = new VKImguiState((VKRenderDevice*)m_RenderDevice, m_Window, (VKCommandQueue*)m_CommandQueue, (VKRenderPass*)m_RenderPass, (VKCommandBuffer*) m_CommandBuffer);
 }
 
 void Application::OnTerminate()
 {
+    m_ImguiState->DestroyBackend((VKRenderDevice*)m_RenderDevice);
     delete m_DescriptorSet;
     delete m_DescriptorPool;
 
@@ -278,6 +281,8 @@ void Application::OnTerminate()
 
     delete m_RenderDevice;
     delete m_Window;
+
+    delete m_ImguiState;
 }
 
 void Application::Run()
@@ -329,6 +334,16 @@ void Application::Run()
     
         m_CommandBuffer->DrawIndexed(0, 0, indices.size());
         m_CommandBuffer->EndRenderPass();
+
+        // draw imgui
+        m_ImguiState->RenderFrame(
+            (VKFrameBuffer*)m_FrameBuffers[imageIndex], 
+            (VKCommandBuffer*)m_CommandBuffer, 
+            (VKRenderPass*)m_RenderPass, 
+            m_Swapchain->GetWidth(), 
+            m_Swapchain->GetHeight(), 
+            reinterpret_cast<VkClearValue*>(clearColor)
+        );
     
         m_CommandBuffer->EndRecording();
     
