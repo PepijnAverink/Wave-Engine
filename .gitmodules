@@ -1,0 +1,3 @@
+[submodule "GameEngine/dependencies/imgui"]
+	path = GameEngine/dependencies/imgui
+	url = https://github.com/ocornut/imgui
