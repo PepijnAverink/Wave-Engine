@@ -243,7 +243,7 @@ void Application::OnInitialize()
         45.0f, 0.1f, 100.0f, m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight());*/
     m_Camera = new Orthographic(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec2(-5.0f, 5.0f), glm::vec2(-5.0f, 5.0f), glm::vec2(0.1f, 10.0f));
-    m_VP.view = m_Camera->GetViewMatrix();/*glm::lookAt(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));*/
+    m_VP.view = m_Camera->GetViewMatrix();
     m_VP.proj = m_Camera->GetProjectionMatrix();
     m_VP.proj[1][1] *= -1;
 
@@ -490,32 +490,28 @@ bool Application::OnMouseMoveEvent(MouseMoveEvent& _event)
             m_MouseX = _event.GetX();
             m_MouseY = _event.GetY();
             m_Camera->Rotate(xOffset, yOffset);
-            //Logger::Log(std::to_string(xOffset), LOG_TYPE_INFO);
+           
         }
         
     }
-    //Logger::Log(" Mouse Moves to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
 }
 
 bool Application::OnMouseLeftDown(MouseLeftDownEvent& _event)
 {
-    //Logger::Log(" Left Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
 }
 
 bool Application::OnMouseLeftUp(MouseLeftUpEvent& _event)
 {
-    //Logger::Log(" Left Up to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
     m_FirstMouse = true;
     return true;
 }
 
 bool Application::OnMouseRightDown(MouseRightDownEvent& _event)
 {
-    //Logger::Log(" Right Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
 }
