@@ -24,17 +24,25 @@
 using namespace Graphics;
 class Application
 {
+
+	
 public:
 	Application() = default;
 
 	void OnInitialize();
 	void OnTerminate();
-
+	
+	
 	void Run();
 
 private:
-	bool OnEvent(Event& _event);
 
+	void OnUpdate();
+	void OnRender();
+
+	void CalculateFrameStats();
+
+	bool OnEvent(Event& _event);
 	bool OnWindowCloseEvent();
 	bool OnWindowResizeEvent(WindowResizeEvent& _event);
 	bool OnKeyDownEvent(KeyDownEvent& _event);
@@ -45,8 +53,10 @@ private:
 	bool OnMouseRightDown(MouseRightDownEvent& _event);
 	bool OnMouseRightUp(MouseRightUpEvent& _event);
 
+	
 
-
+	Timer m_Timer;
+	Camera* m_Camera =  nullptr;
 
 	Window* m_Window = nullptr;
 
@@ -72,4 +82,11 @@ private:
 	DescriptorPool* m_DescriptorPool = nullptr;
 	DescriptorSet* m_DescriptorSet = nullptr;
 	Buffer* m_UniformBuffer = nullptr;
+	struct UniformBufferObject {
+		glm::mat4 view;
+		glm::mat4 proj;
+	}m_VP;
+
+	int m_MouseX, m_MouseY;
+	bool m_FirstMouse = true;
 };

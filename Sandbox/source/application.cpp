@@ -4,30 +4,49 @@
 #include <../../GameEngine/dependencies/include/glm/glm.hpp>
 #include <../../GameEngine/dependencies/include/glm/gtc/matrix_transform.hpp>
 #include "stdafx.h"
-struct UniformBufferObject {
-    glm::mat4 view;
-    glm::mat4 proj;
-};
+
 
 glm::mat4 model;
 
 namespace App{
     struct Vertex {
-        float pos[2];
+        float pos[3];
         float color[3];
     };
 }
 
-
 std::vector<App::Vertex> vertices = {
-    {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
-    {{0.5f, -0.5f }, {0.0f, 1.0f, 0.0f}},
-    {{0.5f, 0.5f  }, {0.0f, 0.0f, 1.0f}},
-    {{-0.5f, 0.5f }, {1.0f, 1.0f, 1.0f}}
+    //front
+    {{-0.5f, -0.5f, 0.5f}, {1.0f, 0.0f, 0.0f}},
+    {{0.5f, -0.5f, 0.5f }, {0.0f, 1.0f, 0.0f}},
+    {{0.5f, 0.5f, 0.5f  }, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f, 0.5f, 0.5f }, {1.0f, 1.0f, 1.0f}},
+    ////back
+    { {-0.5f, -0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+    {{0.5f, -0.5f, -0.5f }, {0.0f, 1.0f, 0.0f}},
+    {{0.5f, 0.5f, -0.5f  }, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f, 0.5f, -0.5f }, {1.0f, 1.0f, 1.0f}}
 };
 
 std::vector<uint16_t> indices = {
-    0, 1, 2, 2, 3, 0
+    //front
+    0, 1, 2,
+    2, 3, 0,
+    // right
+    1, 5, 6,
+    6, 2, 1,
+    //back
+    7, 6, 5,
+    5, 4, 7,
+    // left
+    4, 0, 3,
+    3, 7, 4,
+    // bottom
+    4, 5, 1,
+    1, 0, 4,
+    // top
+    3, 2, 6,
+    6, 7, 3
 };
 
 void Application::OnInitialize()
@@ -36,6 +55,7 @@ void Application::OnInitialize()
     m_Window = new Window("GameEngine", 1280, 720);
     m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
     m_Window->Show();
+
 
     // Graphics
     // --------------------------------
@@ -153,7 +173,7 @@ void Application::OnInitialize()
     graphicsPipelineDesc.PixelShader = pixelShader;
     graphicsPipelineDesc.InputLayout = m_InputLayout;
     graphicsPipelineDesc.RenderPass = m_RenderPass;
-    graphicsPipelineDesc.VertexLayout = VertexLayout({ { "POS",  ResourceFormat::RESOURCE_FORMAT_R32G32_SFLOAT },
+    graphicsPipelineDesc.VertexLayout = VertexLayout({ { "POS",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT },
                                                        { "COLOR",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, });
 
     m_GraphicsPipeline = m_RenderDevice->CreateGraphicsPipeline(&graphicsPipelineDesc);
@@ -217,18 +237,22 @@ void Application::OnInitialize()
     delete stagingBufferV;
     delete stagingBufferI;
 
-    UniformBufferObject ubo{};
-    model = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    ubo.proj = glm::perspective(glm::radians(45.0f), m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight(), 0.1f, 10.0f);
-    ubo.proj[1][1] *= -1;
+   
+    model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+    /*m_Camera = new Perspective(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        45.0f, 0.1f, 100.0f, m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight());*/
+    m_Camera = new Orthographic(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec2(-5.0f, 5.0f), glm::vec2(-5.0f, 5.0f), glm::vec2(0.1f, 10.0f));
+    m_VP.view = m_Camera->GetViewMatrix();
+    m_VP.proj = m_Camera->GetProjectionMatrix();
+    m_VP.proj[1][1] *= -1;
 
     bufferDesc = {};
     bufferDesc.Name = "UniformBuffer";
     bufferDesc.Size = sizeof(UniformBufferObject);
     bufferDesc.MemoryType = ResourceMemoryType::RESOURCE_MEMORY_TYPE_HOST_MEMORY;
     bufferDesc.Usage = BufferUsage::BUFFER_USAGE_UNIFORM_BUFFER;
-    bufferDesc.Data = &ubo;
+    bufferDesc.Data = &m_VP;
     bufferDesc.BufferLayout = BufferLayout({ { "EMMM",  Graphics::ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, }); // CHange this
 
     m_UniformBuffer = m_RenderDevice->CreateBuffer(&bufferDesc);
@@ -248,6 +272,9 @@ void Application::OnInitialize()
     m_DescriptorSet = m_DescriptorPool->AllocateDescriptorSet(&setDesc);
 
     m_DescriptorSet->AllocateDescriptor(m_UniformBuffer, 0, 0);
+
+    m_MouseX = 0.5 * m_Window->GetWidth();
+    m_MouseY = 0.5 * m_Window->GetHeight();
 }
 
 void Application::OnTerminate()
@@ -288,56 +315,100 @@ void Application::Run()
         // Poll window events
         m_Window->PollEvents();
 
-        // ViewPort
-        ViewPort viewPort;
-        viewPort.X = 0.0f;
-        viewPort.Y = 0.0f;
-        viewPort.Width = m_Swapchain->GetWidth();
-        viewPort.Height = m_Swapchain->GetHeight();
-        viewPort.MinDepth = 0.0f;
-        viewPort.MaxDepth = 1.0f;
-    
-        // ScissorRect
-        ScissorRect scissorRect;
-        scissorRect.X = 0;
-        scissorRect.Y = 0;
-        scissorRect.Width = m_Swapchain->GetWidth();
-        scissorRect.Height = m_Swapchain->GetHeight();
-    
-        m_AquireFence->Reset();
-        uint32_t imageIndex = m_Swapchain->AquireNewImage(m_CommandQueue, m_AquireFence);
-        m_AquireFence->WaitForFence();
-    
-        m_CommandBuffer->Reset();
-        m_CommandPool->Reset();
-    
-        m_CommandBuffer->BeginRecording();
-    
-        float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-        m_CommandBuffer->BeginRenderPass(m_RenderPass, m_FrameBuffers[imageIndex], m_Swapchain->GetWidth(), m_Swapchain->GetHeight(), clearColor);
-    
-        m_CommandBuffer->SetViewPort(&viewPort);
-        m_CommandBuffer->SetScissorRect(&scissorRect);
-    
-        m_CommandBuffer->SetGraphicsPipeline(m_GraphicsPipeline);
-    
-        m_CommandBuffer->SetConstants(&model, 0, sizeof(glm::mat4), 0);
-        m_CommandBuffer->SetDescriptorSet(m_DescriptorSet, 0);
-    
-        m_CommandBuffer->SetVertexBuffer(m_VertexBuffer, 0);
-        m_CommandBuffer->SetIndexBuffer(m_IndexBuffer);
-    
-        m_CommandBuffer->DrawIndexed(0, 0, indices.size());
-        m_CommandBuffer->EndRenderPass();
-    
-        m_CommandBuffer->EndRecording();
-    
-        m_ExecuteFence->Reset();
-        m_CommandQueue->SubmitCommandBuffer(m_CommandBuffer, m_ExecuteFence);
-        m_ExecuteFence->WaitForFence();
-    
-        m_Swapchain->Present(m_CommandQueue);
+        OnUpdate();
+        OnRender();
+        
     }
+}
+
+void Application::OnUpdate()
+{
+    m_Timer.Tick();
+    CalculateFrameStats();
+    float elapsedTime = static_cast<float>(m_Timer.GetElapsedSeconds());
+    // Update Camera
+    if (m_Camera->HasChanged())
+    {
+        if (m_Camera->HasRotationChanged())
+            m_Camera->ApplyRotation(elapsedTime);
+        if (m_Camera->HasTranslationChanged())
+            m_Camera->ApplyTranslation(elapsedTime);
+       
+        m_VP.view = m_Camera->GetViewMatrix();
+        m_UniformBuffer->SetData(&m_VP, sizeof(UniformBufferObject));
+    }
+
+}
+
+void Application::CalculateFrameStats()
+{
+    static int frameCount = 0;
+    static double prevTime = 0.0;
+    double totalTime = m_Timer.GetTotalSeconds();
+    frameCount++;
+    if ((totalTime - prevTime) > 1.0)
+    {
+        float diff = static_cast<float>(totalTime - prevTime);
+        float fps = static_cast<float>(frameCount) / diff;
+        frameCount = 0;
+        prevTime = totalTime;
+        std::wstring windowText = StringToWString(m_Window->GetTitle()) + L" | FPS:  " + 
+            StringToWString(to_string_with_precision(fps, 2));
+        SetWindowText(m_Window->GetWindowHandle(), windowText.c_str());
+    }
+}
+
+void Application::OnRender()
+{
+    // ViewPort
+    ViewPort viewPort;
+    viewPort.X = 0.0f;
+    viewPort.Y = 0.0f;
+    viewPort.Width = m_Swapchain->GetWidth();
+    viewPort.Height = m_Swapchain->GetHeight();
+    viewPort.MinDepth = 0.0f;
+    viewPort.MaxDepth = 1.0f;
+
+    // ScissorRect
+    ScissorRect scissorRect;
+    scissorRect.X = 0;
+    scissorRect.Y = 0;
+    scissorRect.Width = m_Swapchain->GetWidth();
+    scissorRect.Height = m_Swapchain->GetHeight();
+
+    m_AquireFence->Reset();
+    uint32_t imageIndex = m_Swapchain->AquireNewImage(m_CommandQueue, m_AquireFence);
+    m_AquireFence->WaitForFence();
+
+    m_CommandBuffer->Reset();
+    m_CommandPool->Reset();
+
+    m_CommandBuffer->BeginRecording();
+
+    float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    m_CommandBuffer->BeginRenderPass(m_RenderPass, m_FrameBuffers[imageIndex], m_Swapchain->GetWidth(), m_Swapchain->GetHeight(), clearColor);
+
+    m_CommandBuffer->SetViewPort(&viewPort);
+    m_CommandBuffer->SetScissorRect(&scissorRect);
+
+    m_CommandBuffer->SetGraphicsPipeline(m_GraphicsPipeline);
+
+    m_CommandBuffer->SetConstants(&model, 0, sizeof(glm::mat4), 0);
+    m_CommandBuffer->SetDescriptorSet(m_DescriptorSet, 0);
+
+    m_CommandBuffer->SetVertexBuffer(m_VertexBuffer, 0);
+    m_CommandBuffer->SetIndexBuffer(m_IndexBuffer);
+
+    m_CommandBuffer->DrawIndexed(0, 0, indices.size());
+    m_CommandBuffer->EndRenderPass();
+
+    m_CommandBuffer->EndRecording();
+
+    m_ExecuteFence->Reset();
+    m_CommandQueue->SubmitCommandBuffer(m_CommandBuffer, m_ExecuteFence);
+    m_ExecuteFence->WaitForFence();
+
+    m_Swapchain->Present(m_CommandQueue);
 }
 
 bool Application::OnEvent(Event& _event)
@@ -378,41 +449,69 @@ bool Application::OnWindowResizeEvent(WindowResizeEvent& _event)
 
 bool Application::OnKeyDownEvent(KeyDownEvent& _event)
 {
-    if (!_event.isPressed())
-    Logger::Log(std::to_string(_event.GetKey()) + " was pressed", LOG_TYPE_INFO);
+    switch (_event.GetKey())
+    {
+    case 'W':
+        m_Camera->MoveForward();
+        break;
+    case 'S':
+        m_Camera->MoveBackward();
+        break;
+    case 'A':
+        m_Camera->MoveLeft();
+        break;
+    case 'D':
+        m_Camera->MoveRight();
+        break;
+    }
     return true;
 }
 
 bool Application::OnKeyUpEvent(KeyUpEvent& _event)
 {
-    Logger::Log(std::to_string(_event.GetKey()) + " was released", LOG_TYPE_INFO);
+    //Logger::Log(std::to_string(_event.GetKey()) + " was released", LOG_TYPE_INFO);
     return true;
 }
 
 bool Application::OnMouseMoveEvent(MouseMoveEvent& _event)
 {
-    Logger::Log(" Mouse Moves to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
+    if (_event.GetState() == MouseMoveEvent::State::LEFT_BUTTON)
+    {
+        if (m_FirstMouse)
+        {
+            m_MouseX = _event.GetX();
+            m_MouseY = _event.GetY();
+            m_FirstMouse = false;
+        }
+        else
+        {
+            int xOffset =  m_MouseX - _event.GetX();
+            int yOffset =  _event.GetY() - m_MouseY;
+            m_MouseX = _event.GetX();
+            m_MouseY = _event.GetY();
+            m_Camera->Rotate(xOffset, yOffset);
+           
+        }
+        
+    }
 
     return true;
 }
 
 bool Application::OnMouseLeftDown(MouseLeftDownEvent& _event)
 {
-    Logger::Log(" Left Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
 }
 
 bool Application::OnMouseLeftUp(MouseLeftUpEvent& _event)
 {
-    Logger::Log(" Left Up to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
-
+    m_FirstMouse = true;
     return true;
 }
 
 bool Application::OnMouseRightDown(MouseRightDownEvent& _event)
 {
-    Logger::Log(" Right Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
 }

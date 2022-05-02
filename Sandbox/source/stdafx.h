@@ -12,7 +12,9 @@
 #include <optional>
 #include <set>
 
+
 #include "core/logger.h"
+#include "core/performance/timer.h"
 #include "core/event/event.h"
 #include "core/event/event_category.h"
 #include "core/event/event_dispatcher.h"
@@ -188,6 +190,11 @@
 #include "utility/hash_utility.h"
 #include "utility/string_utility.h"
 #include "utility/version.h"
+
+#include "graphics/renderer/camera/camera.h"
+#include "graphics/renderer/camera/perspective.h"
+#include "graphics/renderer/camera/orthographic.h"
+
 
 
 

@@ -1,8 +1,19 @@
 #pragma once
 #include <string>
+#include <sstream>
 
 inline std::string  WStringToString(std::wstring _str) { return std::string(_str.begin(), _str.end()); }
 inline std::wstring StringToWString(std::string _str) { return std::wstring(_str.begin(), _str.end()); }
+
+template<typename T>
+std::string to_string_with_precision(const T a_value, const int n = 2)
+{
+	std::ostringstream out;
+	out.precision(n);
+	out << std::fixed << a_value;
+	return out.str();
+}
+
 
 inline void CopyString(const std::string& _string, char** _buffer)
 {

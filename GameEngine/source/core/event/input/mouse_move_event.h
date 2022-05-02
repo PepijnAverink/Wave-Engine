@@ -3,13 +3,16 @@
 
 class MouseMoveEvent final : public Event
 {
+	
+public:
+
 	enum State
 	{
 		NONE = 0x00,
 		LEFT_BUTTON = 0x01,
 		RIGHT_BUTTON = 0x02
 	};
-public:
+
 	MouseMoveEvent(const int _x, const int _y, int _state)
 		: m_X(_x), m_Y(_y)
 
