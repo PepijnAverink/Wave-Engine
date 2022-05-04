@@ -3,6 +3,7 @@
 #include <../../GameEngine/dependencies/include/glm/gtc/matrix_transform.hpp>
 #include "stdafx.h"
 
+glm::mat4 model;
 
 
 void Application::OnInitialize()
@@ -120,10 +121,10 @@ void Application::OnInitialize()
 
    
     model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-    /*m_Camera = new Perspective(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
-        45.0f, 0.1f, 100.0f, m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight());*/
-    m_Camera = new Orthographic(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec2(-5.0f, 5.0f), glm::vec2(-5.0f, 5.0f), glm::vec2(0.1f, 10.0f));
+    m_Camera = new Perspective(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        45.0f, 0.1f, 100.0f, RendererBackend::GetClientWidth() / (float)RendererBackend::GetClientHeight());
+   /* m_Camera = new Orthographic(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec2(-5.0f, 5.0f), glm::vec2(-5.0f, 5.0f), glm::vec2(0.1f, 10.0f));*/
     m_VP.view = m_Camera->GetViewMatrix();
     m_VP.proj = m_Camera->GetProjectionMatrix();
     m_VP.proj[1][1] *= -1;
