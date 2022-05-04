@@ -182,13 +182,16 @@
 #include "graphics/renderer/material/material.h"
 #include "graphics/renderer/material/material_instance.h"
 
-#include "graphics/renderer/model/default/quad.h"
-#include "graphics/renderer/model/mesh.h"
+
 #include "graphics/renderer/model/sub_mesh.h"
 #include "graphics/renderer/model/vertex.h"
+#include "graphics/renderer/model/mesh.h"
+#include "graphics/renderer/model/primitives/cube.h"
+#include "graphics/renderer/model/default/quad.h"
 
-#include "graphics/renderer/renderer3D.h"
+
 #include "graphics/renderer/renderer_backend.h"
+#include "graphics/renderer/renderer3D.h"
 
 #include "utility/hash_utility.h"
 #include "utility/string_utility.h"

@@ -26,9 +26,9 @@ namespace Graphics
 
         SubMesh quad;
         quad.VertexOffset = 0;
-        quad.VertexCount  = 4;
+        quad.VertexCount  = vertices.size();
         quad.IndexOffset  = 0;
-        quad.IndexCount   = 6;
+        quad.IndexCount   = indices.size();
 
         m_SubMeshes.push_back(quad);
 	}

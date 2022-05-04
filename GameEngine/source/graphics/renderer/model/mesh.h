@@ -1,8 +1,5 @@
 #pragma once
-#include "./graphics/renderer/model/sub_mesh.h"
-#include "./graphics/renderer/model/vertex.h"
 
-#include "./graphics/api/interface/resource/buffer/buffer.h"
 
 namespace Graphics
 {

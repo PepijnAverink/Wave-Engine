@@ -345,6 +345,7 @@
     <ClCompile Include="source\graphics\renderer\material\material_instance.cpp" />
     <ClCompile Include="source\graphics\renderer\model\default\quad.cpp" />
     <ClCompile Include="source\graphics\renderer\model\mesh.cpp" />
+    <ClCompile Include="source\graphics\renderer\model\primitives\cube.cpp" />
     <ClCompile Include="source\graphics\renderer\renderer3D.cpp" />
     <ClCompile Include="source\graphics\renderer\renderer_backend.cpp" />
     <ClCompile Include="source\core\stdafx.cpp">
@@ -470,6 +471,7 @@
     <ClInclude Include="source\graphics\renderer\material\material_instance.h" />
     <ClInclude Include="source\graphics\renderer\model\default\quad.h" />
     <ClInclude Include="source\graphics\renderer\model\mesh.h" />
+    <ClInclude Include="source\graphics\renderer\model\primitives\cube.h" />
     <ClInclude Include="source\graphics\renderer\model\sub_mesh.h" />
     <ClInclude Include="source\graphics\renderer\model\vertex.h" />
     <ClInclude Include="source\graphics\renderer\renderer3D.h" />

@@ -1,8 +1,5 @@
 #pragma once
-#include "./graphics/renderer/model/mesh.h"
 
-#include "./graphics/api/interface/object/sync/fence.h"
-#include "./graphics/api/interface/object/command/command_buffer.h"
 
 namespace Graphics
 {

@@ -1,11 +1,8 @@
-//#include "./application.h"
-//#include "./core/event/event_dispatcher.h"
-//
+
 #include <../../GameEngine/dependencies/include/glm/glm.hpp>
 #include <../../GameEngine/dependencies/include/glm/gtc/matrix_transform.hpp>
 #include "stdafx.h"
 
-#include "./graphics/renderer/model/default/quad.h"
 
 struct UniformBufferObject {
     glm::mat4 view;
@@ -113,14 +110,14 @@ void Application::OnInitialize()
     graphicsPipelineDesc.PixelShader = pixelShader;
     graphicsPipelineDesc.InputLayout = m_InputLayout;
     graphicsPipelineDesc.RenderPass = m_RenderPass;
-    graphicsPipelineDesc.VertexLayout = VertexLayout({ { "POS",  ResourceFormat::RESOURCE_FORMAT_R32G32_SFLOAT },
+    graphicsPipelineDesc.VertexLayout = VertexLayout({ { "POS",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT },
                                                        { "COLOR",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, });
 
     m_GraphicsPipeline = m_RenderBackend->GetRenderDevice()->CreateGraphicsPipeline(&graphicsPipelineDesc);
     delete vertexShader;
     delete pixelShader;
 
-    m_Mesh = new Quad(m_CommandBuffer, m_ExecuteFence);
+    m_Mesh = new Cube(m_CommandBuffer, m_ExecuteFence);
 
     UniformBufferObject ubo{};
     model = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));

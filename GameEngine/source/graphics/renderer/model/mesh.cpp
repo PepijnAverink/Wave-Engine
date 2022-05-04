@@ -1,5 +1,4 @@
 #include "core/stdafx.h"
-#include "mesh.h"
 
 namespace Graphics
 {
