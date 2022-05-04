@@ -1,13 +1,14 @@
 #pragma once
-#include "./graphics/renderer/renderer_backend.h"
-
-#include "./graphics/renderer/material/material_instance.h"
-#include "./graphics/renderer/model/mesh.h"
+//#include "./graphics/renderer/renderer_backend.h"
+//
+//#include "./graphics/renderer/material/material_instance.h"
+//#include "./graphics/renderer/model/mesh.h"
 
 #include "../dependencies/include/glm/glm.hpp"
 
 namespace Graphics
 {
+	class RendererBackend;
 	class Renderer3D
 	{
 	public:

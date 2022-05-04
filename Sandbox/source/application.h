@@ -1,25 +1,5 @@
 #pragma once
-//#include "./core/window/window.h"
-//
-//#include "./graphics/api/interface/render_device.h"
-//#include "./graphics/api/interface/object/command/command_queue.h"
-//#include "./graphics/api/interface/object/swapchain/swapchain.h"
-//#include "./graphics/api/interface/object/command/command_pool.h"
-//#include "./graphics/api/interface/object/command/command_buffer.h"
-//#include "./graphics/api/interface/object/sync/fence.h"
-//
-//#include "./graphics/api/interface/pipeline/renderpass/render_pass.h"
-//#include "./graphics/api/interface/pipeline/framebuffer/frame_buffer.h"
-//#include "./graphics/api/interface/pipeline/graphics/graphics_pipeline.h"
-//#include "./graphics/api/interface/pipeline/layout/input_layout.h"
-//
-//#include "./graphics/api/interface/resource/shader/shader.h"
-//#include "./graphics/api/interface/resource/buffer/buffer.h"
-//
-//#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_pool.h"
-//#include "./graphics/api/interface/pipeline/layout/descriptor/descriptor_set.h"
-//
-//#include "./core/event/window/window_resize_event.h"
+
 
 using namespace Graphics;
 class Application
@@ -60,10 +40,6 @@ private:
 
 	Window* m_Window = nullptr;
 
-	RenderDevice* m_RenderDevice = nullptr;
-	Swapchain* m_Swapchain = nullptr;
-
-	CommandQueue* m_CommandQueue = nullptr;
 	CommandBuffer* m_CommandBuffer = nullptr;
 	CommandPool* m_CommandPool = nullptr;
 
@@ -75,9 +51,9 @@ private:
 	GraphicsPipeline* m_GraphicsPipeline = nullptr;
 	InputLayout* m_InputLayout = nullptr;
 
-	Buffer* m_VertexBuffer = nullptr;
-	Buffer* m_IndexBuffer = nullptr;
+	Mesh* m_Mesh = nullptr;
 
+	RendererBackend* m_RenderBackend = nullptr;
 
 	DescriptorPool* m_DescriptorPool = nullptr;
 	DescriptorSet* m_DescriptorSet = nullptr;

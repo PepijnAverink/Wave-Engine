@@ -1,53 +1,9 @@
-//#include "./application.h"
-//#include "./core/event/event_dispatcher.h"
-//
+
 #include <../../GameEngine/dependencies/include/glm/glm.hpp>
 #include <../../GameEngine/dependencies/include/glm/gtc/matrix_transform.hpp>
 #include "stdafx.h"
 
 
-glm::mat4 model;
-
-namespace App{
-    struct Vertex {
-        float pos[3];
-        float color[3];
-    };
-}
-
-std::vector<App::Vertex> vertices = {
-    //front
-    {{-0.5f, -0.5f, 0.5f}, {1.0f, 0.0f, 0.0f}},
-    {{0.5f, -0.5f, 0.5f }, {0.0f, 1.0f, 0.0f}},
-    {{0.5f, 0.5f, 0.5f  }, {0.0f, 0.0f, 1.0f}},
-    {{-0.5f, 0.5f, 0.5f }, {1.0f, 1.0f, 1.0f}},
-    ////back
-    { {-0.5f, -0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
-    {{0.5f, -0.5f, -0.5f }, {0.0f, 1.0f, 0.0f}},
-    {{0.5f, 0.5f, -0.5f  }, {0.0f, 0.0f, 1.0f}},
-    {{-0.5f, 0.5f, -0.5f }, {1.0f, 1.0f, 1.0f}}
-};
-
-std::vector<uint16_t> indices = {
-    //front
-    0, 1, 2,
-    2, 3, 0,
-    // right
-    1, 5, 6,
-    6, 2, 1,
-    //back
-    7, 6, 5,
-    5, 4, 7,
-    // left
-    4, 0, 3,
-    3, 7, 4,
-    // bottom
-    4, 5, 1,
-    1, 0, 4,
-    // top
-    3, 2, 6,
-    6, 7, 3
-};
 
 void Application::OnInitialize()
 {
@@ -57,37 +13,15 @@ void Application::OnInitialize()
     m_Window->Show();
 
 
-    // Graphics
-    // --------------------------------
-    RenderDeviceDescriptor renderDeviceDesc;
-    renderDeviceDesc.Window = m_Window;
-    renderDeviceDesc.API = GraphicsAPI::GRAPHICS_API_VULKAN;
-    renderDeviceDesc.DebugMode = DebugMode::DEBUG_MODE_DEBUG_ONLY;
+    m_RenderBackend = RendererBackend::Create(m_Window);
 
-    m_RenderDevice = RenderDevice::Create(&renderDeviceDesc);
-
-    // CommandQueue
-    Graphics::CommandQueueDescriptor commandQueueDesc;
-    commandQueueDesc.Name = "GeneralCommandQueue";
-    commandQueueDesc.Type = CommandQueueType::COMMAND_QUEUE_TYPE_GRAPHICS;
-
-    m_CommandQueue = m_RenderDevice->CreateCommandQueue(&commandQueueDesc);
-
-    // Swapchain
-    SwapchainDescriptor swapchainDesc;
-    swapchainDesc.Name = "Swapchain";
-    swapchainDesc.Window = m_Window;
-    swapchainDesc.Width = m_Window->GetWidth();
-    swapchainDesc.Height = m_Window->GetHeight();
-
-    m_Swapchain = m_RenderDevice->CreateSwapchain(m_CommandQueue, &swapchainDesc);
 
     // CommandPool
     CommandPoolDescriptor commandPoolDesc = {};
     commandPoolDesc.Name = "CommandPool";
     commandPoolDesc.Type = CommandQueueType::COMMAND_QUEUE_TYPE_GRAPHICS;
 
-    m_CommandPool = m_RenderDevice->CreateCommandPool(&commandPoolDesc);
+    m_CommandPool = m_RenderBackend->GetRenderDevice()->CreateCommandPool(&commandPoolDesc);
 
     // CommandBuffer
     CommandBufferDescriptor commandBufferDesc = {};
@@ -95,17 +29,17 @@ void Application::OnInitialize()
     commandBufferDesc.Type = CommandBufferType::COMMAND_BUFFER_TYPE_DIRECT;
     commandBufferDesc.CommandPool = m_CommandPool;
 
-    m_CommandBuffer = m_RenderDevice->CreateCommandBuffer(&commandBufferDesc);
+    m_CommandBuffer = m_RenderBackend->GetRenderDevice()->CreateCommandBuffer(&commandBufferDesc);
 
     // Fences
     FenceDescriptor fenceDesc;
     fenceDesc.TimeOut = UINT64_MAX;
 
     fenceDesc.Name = "ExecuteFence";
-    m_ExecuteFence = m_RenderDevice->CreateFence(&fenceDesc);
+    m_ExecuteFence = m_RenderBackend->GetRenderDevice()->CreateFence(&fenceDesc);
 
     fenceDesc.Name = "PresentFence";
-    m_AquireFence = m_RenderDevice->CreateFence(&fenceDesc);
+    m_AquireFence = m_RenderBackend->GetRenderDevice()->CreateFence(&fenceDesc);
 
     // RenderPass
     RenderPassDescriptor renderPassDesc = {};
@@ -119,20 +53,20 @@ void Application::OnInitialize()
             RESOURCE_STATE_PRESENT
         }, };
 
-    m_RenderPass = m_RenderDevice->CreateRenderPass(&renderPassDesc);
+    m_RenderPass = m_RenderBackend->GetRenderDevice()->CreateRenderPass(&renderPassDesc);
 
     // FrameBuffer
-    m_FrameBuffers.resize(m_Swapchain->GetBufferCount());
-    for (uint32_t i = 0; i < m_Swapchain->GetBufferCount(); i++) {
+    m_FrameBuffers.resize(RendererBackend::GetBackbufferCount());
+    for (uint32_t i = 0; i < RendererBackend::GetBackbufferCount(); i++) {
         FrameBufferDescriptor frameBufferDesc = {};
-        frameBufferDesc.Name = "FrameBuffer" + i;
-        frameBufferDesc.Width = m_Swapchain->GetWidth();
-        frameBufferDesc.Height = m_Swapchain->GetHeight();
-        frameBufferDesc.Contigious = true;
-        frameBufferDesc.Attachments = { {m_Swapchain->GetTextureViewAtIndex(i), FrameBufferAttachmentType::FRAME_BUFFER_ATTACHMENT_TYPE_COLOR }, };
-        frameBufferDesc.RenderPass = m_RenderPass;
+        frameBufferDesc.Name        = "FrameBuffer" + i;
+        frameBufferDesc.Width       = RendererBackend::GetClientWidth();
+        frameBufferDesc.Height      = RendererBackend::GetClientHeight();
+        frameBufferDesc.Contigious  = true;
+        frameBufferDesc.Attachments = { {m_RenderBackend->GetSwapchain()->GetTextureViewAtIndex(i), FrameBufferAttachmentType::FRAME_BUFFER_ATTACHMENT_TYPE_COLOR }, };
+        frameBufferDesc.RenderPass  = m_RenderPass;
 
-        m_FrameBuffers[i] = m_RenderDevice->CreateFrameBuffer(&frameBufferDesc);
+        m_FrameBuffers[i] = m_RenderBackend->GetRenderDevice()->CreateFrameBuffer(&frameBufferDesc);
     }
 
     // VertexShader
@@ -142,7 +76,7 @@ void Application::OnInitialize()
     shaderDesc.EntryPoint = "main";
     shaderDesc.Type = Graphics::ShaderType::SHADER_TYPE_VERTEX;
 
-    Shader* vertexShader = m_RenderDevice->CreateShader(&shaderDesc);
+    Shader* vertexShader = m_RenderBackend->GetRenderDevice()->CreateShader(&shaderDesc);
 
     // PixelShader
     shaderDesc.Name = "PixelShader";
@@ -150,7 +84,7 @@ void Application::OnInitialize()
     shaderDesc.EntryPoint = "main";
     shaderDesc.Type = Graphics::ShaderType::SHADER_TYPE_PIXEL;
 
-    Shader* pixelShader = m_RenderDevice->CreateShader(&shaderDesc);
+    Shader* pixelShader = m_RenderBackend->GetRenderDevice()->CreateShader(&shaderDesc);
 
     // Create inputLayout
     InputLayoutDescriptor inputLayoutDesc = {};
@@ -158,7 +92,7 @@ void Application::OnInitialize()
     inputLayoutDesc.Layouts = { InputSet({ { "ModelMatrix", INPUT_TYPE_CONSTANT, SHADER_TYPE_FLAG_VERTEX, 0, sizeof(UniformBufferObject) }, }),
                                 InputSet({ { "CameraMatrices", INPUT_TYPE_UNIFORM_BUFFER, SHADER_TYPE_FLAG_VERTEX, 0, 1 }, }), };
 
-    m_InputLayout = m_RenderDevice->CreateInputLayout(&inputLayoutDesc);
+    m_InputLayout = m_RenderBackend->GetRenderDevice()->CreateInputLayout(&inputLayoutDesc);
 
     // Create graphicsPipeline
     GraphicsPipelineDescriptor graphicsPipelineDesc = {};
@@ -167,8 +101,8 @@ void Application::OnInitialize()
     graphicsPipelineDesc.FillMode = FillMode::FILL_MODE_SOLID;
     graphicsPipelineDesc.WindingOrder = WindingOrder::WINDING_ORDER_CCW;
     graphicsPipelineDesc.Topology = Topology::TOPOLOGY_TRIANGLE_LIST;
-    graphicsPipelineDesc.Width = m_Swapchain->GetWidth();
-    graphicsPipelineDesc.Height = m_Swapchain->GetHeight();
+    graphicsPipelineDesc.Width = RendererBackend::GetClientWidth();
+    graphicsPipelineDesc.Height = RendererBackend::GetClientHeight();
     graphicsPipelineDesc.VertexShader = vertexShader;
     graphicsPipelineDesc.PixelShader = pixelShader;
     graphicsPipelineDesc.InputLayout = m_InputLayout;
@@ -176,66 +110,13 @@ void Application::OnInitialize()
     graphicsPipelineDesc.VertexLayout = VertexLayout({ { "POS",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT },
                                                        { "COLOR",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, });
 
-    m_GraphicsPipeline = m_RenderDevice->CreateGraphicsPipeline(&graphicsPipelineDesc);
+    m_GraphicsPipeline = m_RenderBackend->GetRenderDevice()->CreateGraphicsPipeline(&graphicsPipelineDesc);
     delete vertexShader;
     delete pixelShader;
 
-    uint32_t bufferSizeV = sizeof(vertices[0]) * vertices.size();
+    m_Mesh = new Cube(m_CommandBuffer, m_ExecuteFence);
 
-    BufferDescriptor bufferDesc;
-    bufferDesc.Name = "VertexStagingBuffer";
-    bufferDesc.Size = bufferSizeV;
-    bufferDesc.MemoryType = ResourceMemoryType::RESOURCE_MEMORY_TYPE_HOST_MEMORY;
-    bufferDesc.Usage = BufferUsage::BUFFER_USAGE_STAGING_BUFFER;
-    bufferDesc.Data = vertices.data();
-    bufferDesc.BufferLayout = BufferLayout({ { "POS",  ResourceFormat::RESOURCE_FORMAT_R32G32_SFLOAT },
-                                                       { "COLOR",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, });
 
-    Buffer* stagingBufferV = m_RenderDevice->CreateBuffer(&bufferDesc);
-
-    bufferDesc = {};
-    bufferDesc.Name = "VertexBuffer";
-    bufferDesc.Size = bufferSizeV;
-    bufferDesc.MemoryType = ResourceMemoryType::RESOURCE_MEMORY_TYPE_DEVICE_MEMORY;
-    bufferDesc.Usage = BufferUsage::BUFFER_USAGE_VERTEX_BUFFER;
-    bufferDesc.Data = nullptr;
-    bufferDesc.BufferLayout = BufferLayout({ { "POS",  ResourceFormat::RESOURCE_FORMAT_R32G32_SFLOAT },
-                                             { "COLOR",  ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, });
-
-    m_VertexBuffer = m_RenderDevice->CreateBuffer(&bufferDesc);
-
-    uint32_t bufferSizeI = sizeof(indices[0]) * indices.size();
-
-    bufferDesc = {};
-    bufferDesc.Name = "IndexStagingBuffer";
-    bufferDesc.Size = bufferSizeI;
-    bufferDesc.MemoryType = ResourceMemoryType::RESOURCE_MEMORY_TYPE_HOST_MEMORY;
-    bufferDesc.Usage = BufferUsage::BUFFER_USAGE_STAGING_BUFFER;
-    bufferDesc.Data = indices.data();
-    bufferDesc.BufferLayout = BufferLayout({ { "index",  Graphics::ResourceFormat::RESOURCE_FORMAT_R16_UINT }, });
-
-    Buffer* stagingBufferI = m_RenderDevice->CreateBuffer(&bufferDesc);
-
-    bufferDesc = {};
-    bufferDesc.Name = "IndexBuffer";
-    bufferDesc.Size = bufferSizeI;
-    bufferDesc.MemoryType = ResourceMemoryType::RESOURCE_MEMORY_TYPE_DEVICE_MEMORY;
-    bufferDesc.Usage = BufferUsage::BUFFER_USAGE_INDEX_BUFFER;
-    bufferDesc.Data = nullptr;
-    bufferDesc.BufferLayout = BufferLayout({ { "index",  Graphics::ResourceFormat::RESOURCE_FORMAT_R16_UINT }, });
-
-    m_IndexBuffer = m_RenderDevice->CreateBuffer(&bufferDesc);
-
-    m_CommandBuffer->BeginRecording();
-    m_CommandBuffer->CopyBuffer(stagingBufferV, m_VertexBuffer, bufferSizeV);
-    m_CommandBuffer->CopyBuffer(stagingBufferI, m_IndexBuffer, bufferSizeI);
-    m_CommandBuffer->EndRecording();
-
-    m_ExecuteFence->Reset();
-    m_CommandQueue->SubmitCommandBuffer(m_CommandBuffer, m_ExecuteFence);
-    m_ExecuteFence->WaitForFence();
-    delete stagingBufferV;
-    delete stagingBufferI;
 
    
     model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
@@ -247,6 +128,8 @@ void Application::OnInitialize()
     m_VP.proj = m_Camera->GetProjectionMatrix();
     m_VP.proj[1][1] *= -1;
 
+
+    BufferDescriptor bufferDesc;
     bufferDesc = {};
     bufferDesc.Name = "UniformBuffer";
     bufferDesc.Size = sizeof(UniformBufferObject);
@@ -255,14 +138,14 @@ void Application::OnInitialize()
     bufferDesc.Data = &m_VP;
     bufferDesc.BufferLayout = BufferLayout({ { "EMMM",  Graphics::ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, }); // CHange this
 
-    m_UniformBuffer = m_RenderDevice->CreateBuffer(&bufferDesc);
+    m_UniformBuffer = m_RenderBackend->GetRenderDevice()->CreateBuffer(&bufferDesc);
 
     DescriptorPoolDescriptor poolDesc = {};
     poolDesc.Name = "DescriptorPool";
     poolDesc.MaxDescriptorSet = 1;
     poolDesc.Sizes = { {INPUT_TYPE_UNIFORM_BUFFER, 1}, };
 
-    m_DescriptorPool = m_RenderDevice->CreateDescriptorPool(&poolDesc);
+    m_DescriptorPool = m_RenderBackend->GetRenderDevice()->CreateDescriptorPool(&poolDesc);
 
     DescriptorSetDescriptor setDesc = {};
     setDesc.Name = "DescriptorSet";
@@ -283,13 +166,12 @@ void Application::OnTerminate()
     delete m_DescriptorPool;
 
     // Cleanup
-    delete m_VertexBuffer;
-    delete m_IndexBuffer;
+    delete m_Mesh;
 
     delete m_InputLayout;
     delete m_GraphicsPipeline;
 
-    for (uint32_t i = 0; i < m_Swapchain->GetBufferCount(); i++)
+    for (uint32_t i = 0; i < RendererBackend::GetBackbufferCount(); i++)
         delete m_FrameBuffers[i];
 
     delete m_RenderPass;
@@ -300,10 +182,7 @@ void Application::OnTerminate()
     delete m_CommandBuffer;
     delete m_CommandPool;
 
-    delete m_Swapchain;
-    delete m_CommandQueue;
-
-    delete m_RenderDevice;
+    RendererBackend::Destroy();
     delete m_Window;
 }
 
@@ -315,6 +194,9 @@ void Application::Run()
         // Poll window events
         m_Window->PollEvents();
 
+
+    
+        RendererBackend::Present();
         OnUpdate();
         OnRender();
         
@@ -355,60 +237,61 @@ void Application::CalculateFrameStats()
         std::wstring windowText = StringToWString(m_Window->GetTitle()) + L" | FPS:  " + 
             StringToWString(to_string_with_precision(fps, 2));
         SetWindowText(m_Window->GetWindowHandle(), windowText.c_str());
+
     }
 }
 
 void Application::OnRender()
 {
-    // ViewPort
-    ViewPort viewPort;
-    viewPort.X = 0.0f;
-    viewPort.Y = 0.0f;
-    viewPort.Width = m_Swapchain->GetWidth();
-    viewPort.Height = m_Swapchain->GetHeight();
-    viewPort.MinDepth = 0.0f;
-    viewPort.MaxDepth = 1.0f;
-
-    // ScissorRect
-    ScissorRect scissorRect;
-    scissorRect.X = 0;
-    scissorRect.Y = 0;
-    scissorRect.Width = m_Swapchain->GetWidth();
-    scissorRect.Height = m_Swapchain->GetHeight();
-
-    m_AquireFence->Reset();
-    uint32_t imageIndex = m_Swapchain->AquireNewImage(m_CommandQueue, m_AquireFence);
-    m_AquireFence->WaitForFence();
-
-    m_CommandBuffer->Reset();
-    m_CommandPool->Reset();
-
-    m_CommandBuffer->BeginRecording();
-
-    float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    m_CommandBuffer->BeginRenderPass(m_RenderPass, m_FrameBuffers[imageIndex], m_Swapchain->GetWidth(), m_Swapchain->GetHeight(), clearColor);
-
-    m_CommandBuffer->SetViewPort(&viewPort);
-    m_CommandBuffer->SetScissorRect(&scissorRect);
-
-    m_CommandBuffer->SetGraphicsPipeline(m_GraphicsPipeline);
-
-    m_CommandBuffer->SetConstants(&model, 0, sizeof(glm::mat4), 0);
-    m_CommandBuffer->SetDescriptorSet(m_DescriptorSet, 0);
-
-    m_CommandBuffer->SetVertexBuffer(m_VertexBuffer, 0);
-    m_CommandBuffer->SetIndexBuffer(m_IndexBuffer);
-
-    m_CommandBuffer->DrawIndexed(0, 0, indices.size());
-    m_CommandBuffer->EndRenderPass();
-
-    m_CommandBuffer->EndRecording();
-
-    m_ExecuteFence->Reset();
-    m_CommandQueue->SubmitCommandBuffer(m_CommandBuffer, m_ExecuteFence);
-    m_ExecuteFence->WaitForFence();
-
-    m_Swapchain->Present(m_CommandQueue);
+   // ViewPort
+        ViewPort viewPort;
+        viewPort.X = 0.0f;
+        viewPort.Y = 0.0f;
+        viewPort.Width = RendererBackend::GetClientWidth();
+        viewPort.Height = RendererBackend::GetClientHeight();
+        viewPort.MinDepth = 0.0f;
+        viewPort.MaxDepth = 1.0f;
+    
+        // ScissorRect
+        ScissorRect scissorRect;
+        scissorRect.X = 0;
+        scissorRect.Y = 0;
+        scissorRect.Width = RendererBackend::GetClientWidth();
+        scissorRect.Height = RendererBackend::GetClientHeight();
+    
+        m_AquireFence->Reset();
+        uint32_t imageIndex = RendererBackend::AquireNewFrame(m_AquireFence);
+        m_AquireFence->WaitForFence();
+    
+        m_CommandBuffer->Reset();
+        m_CommandPool->Reset();
+    
+        m_CommandBuffer->BeginRecording();
+    
+        float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        m_CommandBuffer->BeginRenderPass(m_RenderPass, m_FrameBuffers[imageIndex], RendererBackend::GetClientWidth(), RendererBackend::GetClientHeight(), clearColor);
+    
+        m_CommandBuffer->SetViewPort(&viewPort);
+        m_CommandBuffer->SetScissorRect(&scissorRect);
+    
+        m_CommandBuffer->SetGraphicsPipeline(m_GraphicsPipeline);
+    
+        m_CommandBuffer->SetConstants(&model, 0, sizeof(glm::mat4), 0);
+        m_CommandBuffer->SetDescriptorSet(m_DescriptorSet, 0);
+    
+        m_CommandBuffer->SetVertexBuffer(m_Mesh->GetVertexBuffer(), 0);
+        m_CommandBuffer->SetIndexBuffer(m_Mesh->GetIndexBuffer());
+    
+        m_CommandBuffer->DrawIndexed(0, 0, m_Mesh->GetSubMeshes()[0].IndexCount);
+        m_CommandBuffer->EndRenderPass();
+    
+        m_CommandBuffer->EndRecording();
+    
+        m_ExecuteFence->Reset();
+        RendererBackend::SubmitCommandBuffer(m_CommandBuffer, m_ExecuteFence);
+        m_ExecuteFence->WaitForFence();
+    
+        RendererBackend::Present();
 }
 
 bool Application::OnEvent(Event& _event)
@@ -428,20 +311,20 @@ bool Application::OnEvent(Event& _event)
 
 bool Application::OnWindowResizeEvent(WindowResizeEvent& _event)
 {
-    m_Swapchain->Resize(m_CommandQueue, _event.GetWidth(), _event.GetHeight());
+    RendererBackend::Resize(_event.GetWidth(), _event.GetHeight());
     for (uint32_t i = 0; i < m_FrameBuffers.size(); i++)
     {
         delete m_FrameBuffers[i];
 
         FrameBufferDescriptor frameBufferDesc = {};
-        frameBufferDesc.Name = "FrameBuffer" + i;
-        frameBufferDesc.Width = m_Swapchain->GetWidth();
-        frameBufferDesc.Height = m_Swapchain->GetHeight();
-        frameBufferDesc.Contigious = true;
-        frameBufferDesc.Attachments = { {m_Swapchain->GetTextureViewAtIndex(i), FrameBufferAttachmentType::FRAME_BUFFER_ATTACHMENT_TYPE_COLOR }, };
-        frameBufferDesc.RenderPass = m_RenderPass;
+        frameBufferDesc.Name        = "FrameBuffer" + i;
+        frameBufferDesc.Width       = RendererBackend::GetClientWidth();
+        frameBufferDesc.Height      = RendererBackend::GetClientHeight();
+        frameBufferDesc.Contigious  = true;
+        frameBufferDesc.Attachments = { {m_RenderBackend->GetSwapchain()->GetTextureViewAtIndex(i), FrameBufferAttachmentType::FRAME_BUFFER_ATTACHMENT_TYPE_COLOR }, };
+        frameBufferDesc.RenderPass  = m_RenderPass;
 
-        m_FrameBuffers[i] = m_RenderDevice->CreateFrameBuffer(&frameBufferDesc);
+        m_FrameBuffers[i] = m_RenderBackend->GetRenderDevice()->CreateFrameBuffer(&frameBufferDesc);
     }
 
     return true;

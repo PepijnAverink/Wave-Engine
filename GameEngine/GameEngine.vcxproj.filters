@@ -135,6 +135,13 @@
     <ClCompile Include="source\core\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\graphics\renderer\model\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\renderer\model\default\quad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\renderer\model\primitives\cube.cpp">
     <ClCompile Include="source\graphics\renderer\camera\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -497,6 +504,7 @@
     <ClInclude Include="source\core\event\input\mouse_right_up_event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\graphics\renderer\model\primitives\cube.h">
     <ClInclude Include="source\core\performance\timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
