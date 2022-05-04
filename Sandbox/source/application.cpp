@@ -4,12 +4,6 @@
 #include "stdafx.h"
 
 
-struct UniformBufferObject {
-    glm::mat4 view;
-    glm::mat4 proj;
-};
-
-glm::mat4 model;
 
 void Application::OnInitialize()
 {
@@ -18,7 +12,10 @@ void Application::OnInitialize()
     m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
     m_Window->Show();
 
+
     m_RenderBackend = RendererBackend::Create(m_Window);
+
+
     // CommandPool
     CommandPoolDescriptor commandPoolDesc = {};
     commandPoolDesc.Name = "CommandPool";
@@ -119,11 +116,18 @@ void Application::OnInitialize()
 
     m_Mesh = new Cube(m_CommandBuffer, m_ExecuteFence);
 
-    UniformBufferObject ubo{};
-    model = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    ubo.proj = glm::perspective(glm::radians(45.0f), RendererBackend::GetClientWidth() / (float)RendererBackend::GetClientHeight(), 0.1f, 10.0f);
-    ubo.proj[1][1] *= -1;
+
+
+   
+    model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+    /*m_Camera = new Perspective(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        45.0f, 0.1f, 100.0f, m_Swapchain->GetWidth() / (float)m_Swapchain->GetHeight());*/
+    m_Camera = new Orthographic(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec2(-5.0f, 5.0f), glm::vec2(-5.0f, 5.0f), glm::vec2(0.1f, 10.0f));
+    m_VP.view = m_Camera->GetViewMatrix();
+    m_VP.proj = m_Camera->GetProjectionMatrix();
+    m_VP.proj[1][1] *= -1;
+
 
     BufferDescriptor bufferDesc;
     bufferDesc = {};
@@ -131,7 +135,7 @@ void Application::OnInitialize()
     bufferDesc.Size = sizeof(UniformBufferObject);
     bufferDesc.MemoryType = ResourceMemoryType::RESOURCE_MEMORY_TYPE_HOST_MEMORY;
     bufferDesc.Usage = BufferUsage::BUFFER_USAGE_UNIFORM_BUFFER;
-    bufferDesc.Data = &ubo;
+    bufferDesc.Data = &m_VP;
     bufferDesc.BufferLayout = BufferLayout({ { "EMMM",  Graphics::ResourceFormat::RESOURCE_FORMAT_R32G32B32_SFLOAT }, }); // CHange this
 
     m_UniformBuffer = m_RenderBackend->GetRenderDevice()->CreateBuffer(&bufferDesc);
@@ -151,6 +155,9 @@ void Application::OnInitialize()
     m_DescriptorSet = m_DescriptorPool->AllocateDescriptorSet(&setDesc);
 
     m_DescriptorSet->AllocateDescriptor(m_UniformBuffer, 0, 0);
+
+    m_MouseX = 0.5 * m_Window->GetWidth();
+    m_MouseY = 0.5 * m_Window->GetHeight();
 }
 
 void Application::OnTerminate()
@@ -187,7 +194,56 @@ void Application::Run()
         // Poll window events
         m_Window->PollEvents();
 
-        // ViewPort
+
+    
+        RendererBackend::Present();
+        OnUpdate();
+        OnRender();
+        
+    }
+}
+
+void Application::OnUpdate()
+{
+    m_Timer.Tick();
+    CalculateFrameStats();
+    float elapsedTime = static_cast<float>(m_Timer.GetElapsedSeconds());
+    // Update Camera
+    if (m_Camera->HasChanged())
+    {
+        if (m_Camera->HasRotationChanged())
+            m_Camera->ApplyRotation(elapsedTime);
+        if (m_Camera->HasTranslationChanged())
+            m_Camera->ApplyTranslation(elapsedTime);
+       
+        m_VP.view = m_Camera->GetViewMatrix();
+        m_UniformBuffer->SetData(&m_VP, sizeof(UniformBufferObject));
+    }
+
+}
+
+void Application::CalculateFrameStats()
+{
+    static int frameCount = 0;
+    static double prevTime = 0.0;
+    double totalTime = m_Timer.GetTotalSeconds();
+    frameCount++;
+    if ((totalTime - prevTime) > 1.0)
+    {
+        float diff = static_cast<float>(totalTime - prevTime);
+        float fps = static_cast<float>(frameCount) / diff;
+        frameCount = 0;
+        prevTime = totalTime;
+        std::wstring windowText = StringToWString(m_Window->GetTitle()) + L" | FPS:  " + 
+            StringToWString(to_string_with_precision(fps, 2));
+        SetWindowText(m_Window->GetWindowHandle(), windowText.c_str());
+
+    }
+}
+
+void Application::OnRender()
+{
+   // ViewPort
         ViewPort viewPort;
         viewPort.X = 0.0f;
         viewPort.Y = 0.0f;
@@ -236,7 +292,6 @@ void Application::Run()
         m_ExecuteFence->WaitForFence();
     
         RendererBackend::Present();
-    }
 }
 
 bool Application::OnEvent(Event& _event)
@@ -277,41 +332,69 @@ bool Application::OnWindowResizeEvent(WindowResizeEvent& _event)
 
 bool Application::OnKeyDownEvent(KeyDownEvent& _event)
 {
-    if (!_event.isPressed())
-    Logger::Log(std::to_string(_event.GetKey()) + " was pressed", LOG_TYPE_INFO);
+    switch (_event.GetKey())
+    {
+    case 'W':
+        m_Camera->MoveForward();
+        break;
+    case 'S':
+        m_Camera->MoveBackward();
+        break;
+    case 'A':
+        m_Camera->MoveLeft();
+        break;
+    case 'D':
+        m_Camera->MoveRight();
+        break;
+    }
     return true;
 }
 
 bool Application::OnKeyUpEvent(KeyUpEvent& _event)
 {
-    Logger::Log(std::to_string(_event.GetKey()) + " was released", LOG_TYPE_INFO);
+    //Logger::Log(std::to_string(_event.GetKey()) + " was released", LOG_TYPE_INFO);
     return true;
 }
 
 bool Application::OnMouseMoveEvent(MouseMoveEvent& _event)
 {
-    Logger::Log(" Mouse Moves to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
+    if (_event.GetState() == MouseMoveEvent::State::LEFT_BUTTON)
+    {
+        if (m_FirstMouse)
+        {
+            m_MouseX = _event.GetX();
+            m_MouseY = _event.GetY();
+            m_FirstMouse = false;
+        }
+        else
+        {
+            int xOffset =  m_MouseX - _event.GetX();
+            int yOffset =  _event.GetY() - m_MouseY;
+            m_MouseX = _event.GetX();
+            m_MouseY = _event.GetY();
+            m_Camera->Rotate(xOffset, yOffset);
+           
+        }
+        
+    }
 
     return true;
 }
 
 bool Application::OnMouseLeftDown(MouseLeftDownEvent& _event)
 {
-    Logger::Log(" Left Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
 }
 
 bool Application::OnMouseLeftUp(MouseLeftUpEvent& _event)
 {
-    Logger::Log(" Left Up to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
-
+    m_FirstMouse = true;
     return true;
 }
 
 bool Application::OnMouseRightDown(MouseRightDownEvent& _event)
 {
-    Logger::Log(" Right Down to: X: " + std::to_string(_event.GetX()) + ", Y: " + std::to_string(_event.GetY()), LOG_TYPE_INFO);
 
     return true;
 }
