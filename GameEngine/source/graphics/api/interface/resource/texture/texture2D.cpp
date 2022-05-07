@@ -7,9 +7,9 @@ namespace Graphics
 		: m_Width(_texture2DDescriptor->Width)
 		, m_Height(_texture2DDescriptor->Height)
 		, m_Format(_texture2DDescriptor->Format)
+		, m_State(_texture2DDescriptor->State)
 	{ }
 
 	Texture2D::~Texture2D()
-	{
-	}
+	{ }
 }

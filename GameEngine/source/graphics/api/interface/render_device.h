@@ -35,6 +35,10 @@ namespace Graphics
 	class BufferDescriptor;
 	class Shader;
 	class ShaderDescriptor;
+	class Texture2D;
+	class Texture2DDescriptor;
+	class Sampler2D;
+	class Sampler2DDescriptor;
 	class RenderDevice
 	{
 	public:
@@ -59,6 +63,9 @@ namespace Graphics
 
 		virtual Buffer* CreateBuffer(const BufferDescriptor* _bufferDescriptor) = 0;
 		virtual Shader* CreateShader(const ShaderDescriptor* _shaderDescriptor) = 0;
+
+		virtual Texture2D* CreateTexture2D(const Texture2DDescriptor* _texture2DDescriptor) = 0;
+		virtual Sampler2D* CreateSampler2D(const Sampler2DDescriptor* _sampler2DDescripotr) = 0;
 
 	protected:
 		RenderDevice(const RenderDeviceDescriptor* _renderDeviceDescriptor);

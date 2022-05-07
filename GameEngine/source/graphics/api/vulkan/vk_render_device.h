@@ -42,6 +42,9 @@ namespace Graphics
 		virtual Buffer* CreateBuffer(const BufferDescriptor* _bufferDescriptor) override;
 		virtual Shader* CreateShader(const ShaderDescriptor* _shaderDescriptor) override;
 
+		virtual Texture2D* CreateTexture2D(const Texture2DDescriptor* _texture2DDescriptor) override;
+		virtual Sampler2D* CreateSampler2D(const Sampler2DDescriptor* _sampler2DDescripotr) override;
+
 	private:
 		bool CheckValidationLayerSupport();
 		void GetVKPhysicalDevice();

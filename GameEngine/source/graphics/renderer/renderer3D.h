@@ -8,6 +8,18 @@
 
 namespace Graphics
 {
+	class Fence;
+	class CommandPool;
+	class CommandBuffer;
+
+	class RenderPass;
+	class FrameBuffer;
+	class GraphicsPipeline;
+	class InputLayout;
+
+	class Mesh;
+	class Camera;
+
 	class RendererBackend;
 	class Renderer3D
 	{
@@ -15,20 +27,18 @@ namespace Graphics
 		virtual void OnInitialize(RendererBackend* _backend);
 		virtual void OnTerminate();
 
-		virtual void DrawMesh(Mesh* _mesh, const glm::mat4& transform);
-		virtual void DrawSubMesh(Mesh* _mesh, const uint32_t _subMeshID, const glm::mat4& transform);
+		virtual void OnResize(const uint32_t _width, const uint32_t _height) = 0;
 
-		virtual void DrawMesh(Mesh* _mesh, MaterialInstance* _material, const glm::mat4& transform);
-		virtual void DrawSubMesh(Mesh* _mesh, const uint32_t _subMeshID, MaterialInstance* _material, const glm::mat4& transform);
+		virtual void BeginScene(Graphics::Camera* _camera) = 0;
+		virtual void EndScene() = 0;
 
-		virtual void DrawFullscreenRect(MaterialInstance* _material);
+		virtual void DrawMesh(Mesh* _mesh, const glm::mat4& transform) {}
+		virtual void DrawSubMesh(Mesh* _mesh, const uint32_t _subMeshID, const glm::mat4& transform) {}
 
-	private:
+	protected:
 		RendererBackend*  m_RendererBackend = nullptr;
 
-		Material*         m_DefaultMaterial = nullptr;
+		Material*         m_DefaultMaterial			= nullptr;
 		MaterialInstance* m_DefaultMaterialInstance = nullptr;
-
-		Material*		  m_FullscreenMaterial = nullptr;
 	};
 }

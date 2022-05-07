@@ -1,4 +1,5 @@
 #pragma once
+#include "./graphics/api/interface/resource/resource_state.h"
 #include "./graphics/api/interface/object/command/command_buffer_descriptor.h"
 namespace Graphics
 {
@@ -31,6 +32,8 @@ namespace Graphics
 
 		virtual void CopyBuffer(Buffer* _srcBuffer, Buffer* _dstBuffer, const uint32_t _size) = 0;
 		virtual void CopyBuffer(Buffer* _srcBuffer, Texture2D* _dstTexture) = 0;
+
+		virtual void TransitionTexture(Texture2D* _texture, ResourceState _from, ResourceState _to) = 0;
 
 		virtual void SetVertexBuffer(Buffer* _vertexBuffer, const uint32_t _binding) = 0;
 		virtual void SetIndexBuffer(Buffer* _indexBuffer) = 0;

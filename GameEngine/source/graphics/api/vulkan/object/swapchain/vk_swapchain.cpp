@@ -23,18 +23,16 @@ namespace Graphics
 	VKSwapchain::~VKSwapchain()
 	{
 		for (uint32_t i = 0; i < m_BufferCount; i++)
-			delete m_TextureViews[i];
-
+			((VKTexture2D*)m_Textures[i])->FreeImageView();
 		vkDestroySwapchainKHR(((VKRenderDevice*)RenderDevice::GetInstance())->GetDevice(), m_SwapChainObj, nullptr);
 	}
 	void VKSwapchain::Resize(CommandQueue* _commandQueue, const uint32_t _width, const uint32_t _height)
 	{
 		// Cleanup
 		for (uint32_t i = 0; i < m_BufferCount; i++)
-			delete m_TextureViews[i];
+			((VKTexture2D*)m_Textures[i])->FreeImageView();
 		vkDestroySwapchainKHR(((VKRenderDevice*)RenderDevice::GetInstance())->GetDevice(), m_SwapChainObj, nullptr);
 		m_Textures.clear();
-		m_TextureViews.clear();
 
 		m_Width  = _width;
 		m_Height = _height;
@@ -46,8 +44,8 @@ namespace Graphics
 
 	uint32_t VKSwapchain::AquireNewImage(CommandQueue* _commandQueue, Fence* _fence)
 	{
-		VkResult result = vkAcquireNextImageKHR(((VKRenderDevice*)RenderDevice::GetInstance())->GetDevice(), m_SwapChainObj, UINT64_MAX, VK_NULL_HANDLE, ((VKFence*)_fence)->GetVKFence(), &m_CurrentFrameIndex);
-		return m_CurrentFrameIndex;
+		VkResult result = vkAcquireNextImageKHR(((VKRenderDevice*)RenderDevice::GetInstance())->GetDevice(), m_SwapChainObj, UINT64_MAX, VK_NULL_HANDLE, ((VKFence*)_fence)->GetVKFence(), &m_CurrentBufferIndex);
+		return m_CurrentBufferIndex;
 	}
 
 	void VKSwapchain::Present(CommandQueue* _commandQueue)
@@ -57,7 +55,7 @@ namespace Graphics
 		presentInfo.waitSemaphoreCount = 0;
 		presentInfo.swapchainCount     = 1;
 		presentInfo.pSwapchains        = &m_SwapChainObj;
-		presentInfo.pImageIndices      = &m_CurrentFrameIndex;
+		presentInfo.pImageIndices      = &m_CurrentBufferIndex;
 
 		vkQueuePresentKHR(((VKCommandQueue*)_commandQueue)->GetVKQueue(), &presentInfo);
 	}
@@ -166,20 +164,11 @@ namespace Graphics
 		textureDesc.Width = m_Width;
 		textureDesc.Height = m_Height;
 		textureDesc.Format = ResolveResourceFormat(format.format);
-		textureDesc.BindFlags = ResourceBindFlags::RESOURCE_BIND_FLAGS_RTV;
 
 		for (uint32_t i = 0; i < m_BufferCount; i++)
 		{
 			textureDesc.Name = "SwapchainImage" + i;
 			m_Textures.push_back(new VKTexture2D(_renderDevice, images[i], &textureDesc));
-		}
-
-		for (size_t i = 0; i < m_Textures.size(); i++) {
-			TextureViewDescriptor textureViewDesc = {};
-			textureViewDesc.Name = "SwapchainImageView" + i;
-			textureViewDesc.MemoryType = ResourceMemoryType::RESOURCE_MEMORY_TYPE_HOST_MEMORY;
-
-			m_TextureViews.push_back(new VKTextureView(_renderDevice, (VKTexture2D*)m_Textures[i], &textureViewDesc));
 		}
 	}
 }

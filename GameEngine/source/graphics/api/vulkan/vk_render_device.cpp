@@ -158,6 +158,7 @@ namespace Graphics
             }
 
             VkPhysicalDeviceFeatures deviceFeatures{};
+            deviceFeatures.samplerAnisotropy = VK_TRUE;
 
             VkDeviceCreateInfo createInfo{};
             createInfo.sType                   = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
@@ -266,6 +267,18 @@ namespace Graphics
     {
         VKShader* shader = new VKShader(this, _shaderDescriptor);
         return shader;
+    }
+
+    Texture2D* VKRenderDevice::CreateTexture2D(const Texture2DDescriptor* _texture2DDescriptor)
+    {
+        VKTexture2D* texture = new VKTexture2D(this, _texture2DDescriptor);
+        return texture;
+    }
+
+    Sampler2D* VKRenderDevice::CreateSampler2D(const Sampler2DDescriptor* _sampler2DDescripotr)
+    {
+        VKSampler2D* sampler = new VKSampler2D(this, _sampler2DDescripotr);
+        return sampler;
     }
 
     Fence* VKRenderDevice::CreateFence(const FenceDescriptor* _fenceDescriptor)

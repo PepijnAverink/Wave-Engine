@@ -32,36 +32,21 @@ private:
 	bool OnMouseLeftUp(MouseLeftUpEvent& _event);
 	bool OnMouseRightDown(MouseRightDownEvent& _event);
 	bool OnMouseRightUp(MouseRightUpEvent& _event);
-
 	
-
 	Timer m_Timer;
 	Camera* m_Camera =  nullptr;
 
 	Window* m_Window = nullptr;
 
-	CommandBuffer* m_CommandBuffer = nullptr;
-	CommandPool* m_CommandPool = nullptr;
-
-	Fence* m_ExecuteFence = nullptr;
 	Fence* m_AquireFence = nullptr;
 
-	RenderPass* m_RenderPass = nullptr;
-	std::vector<FrameBuffer*> m_FrameBuffers;
-	GraphicsPipeline* m_GraphicsPipeline = nullptr;
-	InputLayout* m_InputLayout = nullptr;
-
-	Mesh* m_Mesh = nullptr;
+	Mesh* m_Mesh         = nullptr;
 
 	RendererBackend* m_RenderBackend = nullptr;
+	Renderer3D* m_Renderer = nullptr;
 
-	DescriptorPool* m_DescriptorPool = nullptr;
-	DescriptorSet* m_DescriptorSet = nullptr;
-	Buffer* m_UniformBuffer = nullptr;
-	struct UniformBufferObject {
-		glm::mat4 view;
-		glm::mat4 proj;
-	}m_VP;
+	Graphics::CommandPool* m_CommandPool = nullptr;
+	Graphics::CommandBuffer* m_CommandBuffer = nullptr;
 
 	int m_MouseX, m_MouseY;
 	bool m_FirstMouse = true;

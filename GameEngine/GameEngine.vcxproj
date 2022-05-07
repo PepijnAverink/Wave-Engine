@@ -323,8 +323,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">core/stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="source\graphics\api\interface\resource\sampler\sampler2D.cpp" />
     <ClCompile Include="source\graphics\api\interface\resource\texture\texture2D.cpp" />
-    <ClCompile Include="source\graphics\api\interface\resource\view\texture_view.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_buffer.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_pool.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_queue.cpp" />
@@ -337,14 +337,14 @@
     <ClCompile Include="source\graphics\api\vulkan\pipeline\layout\vk_input_layout.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\resource\buffer\vk_buffer.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\resource\sampler\vk_sampler2D.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\resource\shader\vk_shader.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\resource\texture\vk_texture2D.cpp" />
-    <ClCompile Include="source\graphics\api\vulkan\resource\view\vk_texture_view.cpp" />
     <ClCompile Include="source\graphics\api\vulkan\vk_render_device.cpp" />
     <ClCompile Include="source\graphics\renderer\camera\camera.cpp" />
     <ClCompile Include="source\graphics\renderer\material\material.cpp" />
     <ClCompile Include="source\graphics\renderer\material\material_instance.cpp" />
-    <ClCompile Include="source\graphics\renderer\model\default\quad.cpp" />
+    <ClCompile Include="source\graphics\renderer\model\primitives\quad.cpp" />
     <ClCompile Include="source\graphics\renderer\model\mesh.cpp" />
     <ClCompile Include="source\graphics\renderer\model\primitives\cube.cpp" />
     <ClCompile Include="source\graphics\renderer\renderer3D.cpp" />
@@ -427,20 +427,20 @@
     <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer.h" />
     <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer_descriptor.h" />
     <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer_usage.h" />
-    <ClInclude Include="source\graphics\api\interface\resource\resource_bind_flags.h" />
     <ClInclude Include="source\graphics\api\interface\resource\resource_format.h" />
     <ClInclude Include="source\graphics\api\interface\resource\resource_memory_type.h" />
     <ClInclude Include="source\graphics\api\interface\resource\resource_state.h" />
     <ClInclude Include="source\graphics\api\interface\resource\resource_type.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\address_mode.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\filter_mode.h" />
     <ClInclude Include="source\graphics\api\interface\resource\shader\shader.h" />
     <ClInclude Include="source\graphics\api\interface\resource\shader\shader_descriptor.h" />
     <ClInclude Include="source\graphics\api\interface\resource\shader\shader_type_flags.h" />
     <ClInclude Include="source\graphics\api\interface\resource\shader\shader_type.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\sampler2D.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\sampler2D_descriptor.h" />
     <ClInclude Include="source\graphics\api\interface\resource\texture\texture2D.h" />
     <ClInclude Include="source\graphics\api\interface\resource\texture\texture2D_descriptor.h" />
-    <ClInclude Include="source\graphics\api\interface\resource\view\texture_view.h" />
-    <ClInclude Include="source\graphics\api\interface\resource\view\texture_view_descriptor.h" />
-    <ClInclude Include="source\graphics\api\interface\resource\view\resource_view_type.h" />
     <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_buffer.h" />
     <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_pool.h" />
     <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_queue.h" />
@@ -461,10 +461,12 @@
     <ClInclude Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass_store_op.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\buffer\vk_buffer.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\buffer\vk_buffer_usage.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\sampler\vk_address_mode.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\sampler\vk_filter_mode.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\sampler\vk_sampler2D.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\shader\vk_shader.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\shader\vk_shader_type_flags.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\texture\vk_texture2D.h" />
-    <ClInclude Include="source\graphics\api\vulkan\resource\view\vk_texture_view.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_format.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_memory_type.h" />
     <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_state.h" />
@@ -474,7 +476,7 @@
     <ClInclude Include="source\graphics\renderer\camera\perspective.h" />
     <ClInclude Include="source\graphics\renderer\material\material.h" />
     <ClInclude Include="source\graphics\renderer\material\material_instance.h" />
-    <ClInclude Include="source\graphics\renderer\model\default\quad.h" />
+    <ClInclude Include="source\graphics\renderer\model\primitives\quad.h" />
     <ClInclude Include="source\graphics\renderer\model\mesh.h" />
     <ClInclude Include="source\graphics\renderer\model\primitives\cube.h" />
     <ClInclude Include="source\graphics\renderer\model\sub_mesh.h" />

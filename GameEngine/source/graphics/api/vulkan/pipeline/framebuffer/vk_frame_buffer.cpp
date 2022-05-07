@@ -10,7 +10,7 @@ namespace Graphics
         std::vector<VkImageView> imageViews;
         for (uint32_t i = 0; i < _frameBufferDescriptor->Attachments.size(); i++)
         {
-            imageViews.push_back(((VKTextureView*)_frameBufferDescriptor->Attachments[i].TextureView)->GetVKTextureView());
+            imageViews.push_back(((VKTexture2D*)_frameBufferDescriptor->Attachments[i].Texture)->GetVKTextureView());
         }
 
         VkFramebufferCreateInfo framebufferInfo{};

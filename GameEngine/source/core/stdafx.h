@@ -105,7 +105,6 @@
 
 
 #include "graphics/api/interface/resource/buffer/buffer_usage.h"
-#include "graphics/api/interface/resource/resource_bind_flags.h"
 #include "graphics/api/interface/resource/resource_memory_type.h"
 #include "graphics/api/interface/resource/buffer/buffer_descriptor.h"
 #include "graphics/api/interface/resource/buffer/buffer.h"
@@ -118,7 +117,9 @@
 #include "graphics/api/interface/resource/resource_type.h"
 
 #include "graphics/api/interface/resource/shader/shader_type.h"
-
+#include "graphics/api/interface/resource/sampler/address_mode.h"
+#include "graphics/api/interface/resource/sampler/filter_mode.h"
+#include "graphics/api/interface/resource/sampler/sampler2D_descriptor.h"
 #include "graphics/api/interface/resource/shader/shader_descriptor.h"
 #include "graphics/api/interface/resource/shader/shader.h"
 
@@ -126,12 +127,6 @@
 
 #include "graphics/api/interface/resource/texture/texture2D_descriptor.h"
 #include "graphics/api/interface/resource/texture/texture2D.h"
-
-
-#include "graphics/api/interface/resource/view/resource_view_type.h"
-#include "graphics/api/interface/resource/view/texture_view_descriptor.h"
-#include "graphics/api/interface/resource/view/texture_view.h"
-
 
 
 #include "graphics/api/interface/render_device_descriptor.h"
@@ -149,11 +144,12 @@
 #include "graphics/api/vulkan/resource/vk_resource_format.h"
 #include "graphics/api/vulkan/resource/vk_resource_state.h"
 #include "graphics/api/vulkan/resource/vk_resource_memory_type.h"
-#include "graphics/api/vulkan/resource/view/vk_texture_view.h"
 #include "graphics/api/vulkan/object/swapchain/vk_swapchain.h"
 
 #include "graphics/api/vulkan/object/sync/vk_fence.h"
-
+#include "graphics/api/vulkan/resource/sampler/vk_filter_mode.h"
+#include "graphics/api/vulkan/resource/sampler/vk_sampler2D.h"
+#include "graphics/api/vulkan/resource/sampler/vk_address_mode.h"
 #include "graphics/api/vulkan/pipeline/framebuffer/vk_frame_buffer.h"
 
 #include "graphics/api/vulkan/pipeline/graphics/rasterizer/vk_cull_mode.h"
@@ -188,7 +184,7 @@
 #include "graphics/renderer/model/vertex.h"
 #include "graphics/renderer/model/mesh.h"
 #include "graphics/renderer/model/primitives/cube.h"
-#include "graphics/renderer/model/default/quad.h"
+#include "graphics/renderer/model/primitives/quad.h"
 
 
 #include "graphics/renderer/renderer_backend.h"

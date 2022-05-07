@@ -130,6 +130,26 @@ namespace Graphics
 		vkCmdCopyBufferToImage(m_CommandBufferObj, ((VKBuffer*)_srcBuffer)->GetVKBuffer(), ((VKTexture2D*)_dstTexture)->GetVKTexture(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
 	}
 
+	void VKCommandBuffer::TransitionTexture(Texture2D* _texture, ResourceState _from, ResourceState _to)
+	{
+		VkImageMemoryBarrier barrier{};
+		barrier.sType							= VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+		barrier.oldLayout						= ResolveVKImageLayout(_from);
+		barrier.newLayout						= ResolveVKImageLayout(_to);
+		barrier.srcQueueFamilyIndex				= VK_QUEUE_FAMILY_IGNORED;
+		barrier.dstQueueFamilyIndex				= VK_QUEUE_FAMILY_IGNORED;
+		barrier.image							= ((VKTexture2D*)_texture)->GetVKTexture();
+		barrier.subresourceRange.aspectMask		= VK_IMAGE_ASPECT_COLOR_BIT;
+		barrier.subresourceRange.baseMipLevel	= 0;
+		barrier.subresourceRange.levelCount		= 1;
+		barrier.subresourceRange.baseArrayLayer = 0;
+		barrier.subresourceRange.layerCount		= 1;
+		barrier.srcAccessMask					= ResolveVKAccessFlag(_from);
+		barrier.dstAccessMask					= ResolveVKAccessFlag(_to);
+
+		vkCmdPipelineBarrier(m_CommandBufferObj, ResolveVKStageFlag(_from), ResolveVKStageFlag(_to), 0, 0, nullptr, 0, nullptr, 1, &barrier);
+	}
+
 	void VKCommandBuffer::SetVertexBuffer(Buffer* _vertexBuffer, const uint32_t _binding)
 	{
 		VkBuffer vertexBuffer = ((VKBuffer*)_vertexBuffer)->GetVKBuffer();

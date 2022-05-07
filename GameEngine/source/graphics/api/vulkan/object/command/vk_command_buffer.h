@@ -26,6 +26,8 @@ namespace Graphics
 		virtual void CopyBuffer(Buffer* _srcBuffer, Buffer* _dstBuffer, const uint32_t _size) override;
 		virtual void CopyBuffer(Buffer* _srcBuffer, Texture2D* _dstTexture) override;
 
+		virtual void TransitionTexture(Texture2D* _texture, ResourceState _from, ResourceState _to) override;
+
 		virtual void SetVertexBuffer(Buffer* _vertexBuffer, const uint32_t _binding) override;
 		virtual void SetIndexBuffer(Buffer* _indexBuffer) override;
 

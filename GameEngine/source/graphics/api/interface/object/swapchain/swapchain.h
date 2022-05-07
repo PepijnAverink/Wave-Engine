@@ -22,13 +22,14 @@ namespace Graphics
 		virtual void Present(CommandQueue* _commandQueue) = 0;
 
 		inline uint32_t GetBufferCount() const { return m_BufferCount; }
+		inline uint32_t GetCurrentBufferIndex() const { return m_CurrentBufferIndex; }
 
 		inline uint32_t GetWidth() const { return m_Width; }
 		inline uint32_t GetHeight() const { return m_Height; }
 
 		inline ResourceFormat GetFormat() const { return m_Format; }
 
-		inline TextureView* GetTextureViewAtIndex(const uint32_t _i) const { return m_TextureViews[_i]; }
+		inline Texture2D* GetTextureAtIndex(const uint32_t _i) const { return m_Textures[_i]; }
 
 	protected:
 		Window* m_WindowPtr = nullptr;
@@ -39,9 +40,8 @@ namespace Graphics
 		ResourceFormat m_Format = ResourceFormat::RESOURCE_FORMAT_NONE;
 
 		uint32_t m_BufferCount = 0;
-		uint32_t m_CurrentFrameIndex = 0;
+		uint32_t m_CurrentBufferIndex = 0;
 
-		std::vector<Texture2D*>   m_Textures;
-		std::vector<TextureView*> m_TextureViews;
+		std::vector<Texture2D*> m_Textures;
 	};
 }

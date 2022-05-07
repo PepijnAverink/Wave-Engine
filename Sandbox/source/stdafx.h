@@ -52,7 +52,9 @@
 #include "graphics/api/interface/object/command/command_queue.h"
 
 
-
+#include "graphics/api/interface/resource/sampler/address_mode.h"
+#include "graphics/api/interface/resource/sampler/filter_mode.h"
+#include "graphics/api/interface/resource/sampler/sampler2D_descriptor.h"
 #include "graphics/api/interface/resource/resource_format.h"
 
 
@@ -101,15 +103,10 @@
 #include "graphics/api/interface/pipeline/renderpass/render_pass_load_op.h"
 #include "graphics/api/interface/pipeline/renderpass/render_pass_store_op.h"
 
-
-#include "graphics/api/interface/resource/buffer/buffer_usage.h"
-#include "graphics/api/interface/resource/resource_bind_flags.h"
 #include "graphics/api/interface/resource/resource_memory_type.h"
-#include "graphics/api/interface/resource/buffer/buffer_descriptor.h"
 #include "graphics/api/interface/resource/buffer/buffer.h"
-
-
-
+#include "graphics/api/interface/resource/buffer/buffer_descriptor.h"
+#include "graphics/api/interface/resource/buffer/buffer_usage.h"
 
 
 #include "graphics/api/interface/resource/resource_state.h"
@@ -124,11 +121,6 @@
 
 #include "graphics/api/interface/resource/texture/texture2D_descriptor.h"
 #include "graphics/api/interface/resource/texture/texture2D.h"
-
-
-#include "graphics/api/interface/resource/view/resource_view_type.h"
-#include "graphics/api/interface/resource/view/texture_view_descriptor.h"
-#include "graphics/api/interface/resource/view/texture_view.h"
 
 
 
@@ -147,7 +139,6 @@
 #include "graphics/api/vulkan/resource/vk_resource_format.h"
 #include "graphics/api/vulkan/resource/vk_resource_state.h"
 #include "graphics/api/vulkan/resource/vk_resource_memory_type.h"
-#include "graphics/api/vulkan/resource/view/vk_texture_view.h"
 #include "graphics/api/vulkan/object/swapchain/vk_swapchain.h"
 
 #include "graphics/api/vulkan/object/sync/vk_fence.h"
@@ -163,6 +154,9 @@
 #include "graphics/api/vulkan/resource/shader/vk_shader.h"
 #include "graphics/api/vulkan/pipeline/graphics/vk_graphics_pipeline.h"
 
+#include "graphics/api/vulkan/resource/sampler/vk_filter_mode.h"
+#include "graphics/api/vulkan/resource/sampler/vk_address_mode.h"
+#include "graphics/api/vulkan/resource/sampler/vk_sampler2D.h"
 
 #include "graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_set.h"
 #include "graphics/api/vulkan/pipeline/layout/descriptor/vk_descriptor_pool.h"
@@ -183,10 +177,10 @@
 #include "graphics/renderer/model/vertex.h"
 #include "graphics/renderer/model/mesh.h"
 #include "graphics/renderer/model/primitives/cube.h"
-#include "graphics/renderer/model/default/quad.h"
+#include "graphics/renderer/model/primitives/quad.h"
 
 
-
+#include "default_renderer.h"
 #include "graphics/renderer/renderer3D.h"
 #include "graphics/renderer/renderer_backend.h"
 
@@ -197,9 +191,6 @@
 #include "graphics/renderer/camera/camera.h"
 #include "graphics/renderer/camera/perspective.h"
 #include "graphics/renderer/camera/orthographic.h"
-
-
-
 
 
 #include "../../Sandbox/source/application.h"
