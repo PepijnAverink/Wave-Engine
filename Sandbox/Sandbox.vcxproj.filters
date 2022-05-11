@@ -24,12 +24,18 @@
     <ClCompile Include="source\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\default_renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\default_renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

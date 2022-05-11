@@ -30,7 +30,7 @@ namespace Graphics
 		s_RenderBackend->m_Swapchain->Present(s_RenderBackend->m_CommandQueue);
 	}
 
-	void RendererBackend::Resize(const uint32_t _width, const uint32_t _height)
+	void RendererBackend::OnResize(const uint32_t _width, const uint32_t _height)
 	{
 		s_RenderBackend->m_Swapchain->Resize(s_RenderBackend->m_CommandQueue, _width, _height);
 		s_RenderBackend->m_ClientWidth  = s_RenderBackend->m_Swapchain->GetWidth();
@@ -50,6 +50,11 @@ namespace Graphics
 	uint32_t RendererBackend::GetBackbufferCount()
 	{
 		return s_RenderBackend->m_BackbufferCount;
+	}
+
+	uint32_t RendererBackend::GetCurrntBackbufferIndex()
+	{
+		return s_RenderBackend->m_Swapchain->GetCurrentBufferIndex();
 	}
 
 	RendererBackend::RendererBackend(Window* _window)

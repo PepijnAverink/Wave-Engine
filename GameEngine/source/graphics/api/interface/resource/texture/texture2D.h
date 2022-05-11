@@ -15,10 +15,11 @@ namespace Graphics
 
 		inline ResourceFormat GetFormat() const { return m_Format; }
 
-	private:
+	protected:
 		uint32_t m_Width;
 		uint32_t m_Height;
 
 		ResourceFormat m_Format = ResourceFormat::RESOURCE_FORMAT_NONE;
+		ResourceState m_State   = ResourceState::RESOURCE_STATE_NONE;
 	};
 }

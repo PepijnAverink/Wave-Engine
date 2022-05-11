@@ -73,4 +73,10 @@ namespace Graphics
 
         delete stagingBuffer;
     }
+
+    void Mesh::AddSubmesh(SubMesh _mesh)
+    {
+        m_SubMeshes.push_back(_mesh);
+        m_SubMeshCount++;
+    }
 }

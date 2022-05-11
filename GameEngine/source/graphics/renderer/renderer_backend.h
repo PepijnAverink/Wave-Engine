@@ -13,10 +13,11 @@ namespace Graphics
 		static uint32_t AquireNewFrame(Fence* _fence);
 		static void Present();
 
-		static void Resize(const uint32_t _width, const uint32_t _height);
+		static void OnResize(const uint32_t _width, const uint32_t _height);
 		static uint32_t GetClientWidth();
 		static uint32_t GetClientHeight();
 		static uint32_t GetBackbufferCount();
+		static uint32_t GetCurrntBackbufferIndex();
 
 		// Probably delete these
 		inline RenderDevice* GetRenderDevice() const { return m_RenderDevice; }

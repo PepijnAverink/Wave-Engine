@@ -47,4 +47,25 @@ namespace Graphics
 
 		vkUpdateDescriptorSets(((VKRenderDevice*)RenderDevice::GetInstance())->GetDevice(), 1, &descriptorWrite, 0, nullptr);
 	}
+
+	void VKDescriptorSet::AllocateDescriptor(Texture2D* _texture, Sampler2D* _sampler, const uint32_t _bindingIndex, const uint32_t _arrayIndex)
+	{
+		VkDescriptorImageInfo imageInfo{};
+		imageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		imageInfo.imageView   = ((VKTexture2D*)_texture)->GetVKTextureView();
+		imageInfo.sampler     = ((VKSampler2D*)_sampler)->GetVKSampler();
+
+		VkWriteDescriptorSet descriptorWrite{};
+		descriptorWrite.sType			 = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+		descriptorWrite.dstSet			 = m_DescriptorSetObj;
+		descriptorWrite.dstBinding		 = _bindingIndex;
+		descriptorWrite.dstArrayElement  = _arrayIndex;
+		descriptorWrite.descriptorType   = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+		descriptorWrite.descriptorCount  = 1;
+		descriptorWrite.pBufferInfo		 = nullptr;
+		descriptorWrite.pImageInfo	     = &imageInfo; // Optional
+		descriptorWrite.pTexelBufferView = nullptr; // Optional
+
+		vkUpdateDescriptorSets(((VKRenderDevice*)RenderDevice::GetInstance())->GetDevice(), 1, &descriptorWrite, 0, nullptr);
+	}
 }

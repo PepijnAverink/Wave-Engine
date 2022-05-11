@@ -1,521 +1,177 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="source\core\logger.cpp" />
+    <ClCompile Include="source\core\system\file_system.cpp" />
+    <ClCompile Include="source\core\window\window.cpp" />
+    <ClCompile Include="source\graphics\api\interface\object\command\command_buffer.cpp" />
+    <ClCompile Include="source\graphics\api\interface\object\command\command_pool.cpp" />
+    <ClCompile Include="source\graphics\api\interface\object\command\command_queue.cpp" />
+    <ClCompile Include="source\graphics\api\interface\object\swapchain\swapchain.cpp" />
+    <ClCompile Include="source\graphics\api\interface\object\sync\fence.cpp" />
+    <ClCompile Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer.cpp" />
+    <ClCompile Include="source\graphics\api\interface\pipeline\graphics\graphics_pipeline.cpp" />
+    <ClCompile Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool.cpp" />
+    <ClCompile Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_set.cpp" />
+    <ClCompile Include="source\graphics\api\interface\pipeline\layout\input_layout.cpp" />
+    <ClCompile Include="source\graphics\api\interface\pipeline\renderpass\render_pass.cpp" />
+    <ClCompile Include="source\graphics\api\interface\render_device.cpp" />
+    <ClCompile Include="source\graphics\api\interface\resource\buffer\buffer.cpp" />
+    <ClCompile Include="source\graphics\api\interface\resource\shader\shader.cpp" />
+    <ClCompile Include="source\graphics\api\interface\resource\texture\texture2D.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_buffer.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_pool.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_queue.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\object\swapchain\vk_swapchain.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\object\sync\vk_fence.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\pipeline\framebuffer\vk_frame_buffer.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\pipeline\graphics\vk_graphics_pipeline.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_pool.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_set.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\pipeline\layout\vk_input_layout.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\resource\buffer\vk_buffer.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\resource\shader\vk_shader.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\resource\texture\vk_texture2D.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\vk_render_device.cpp" />
+    <ClCompile Include="source\graphics\renderer\camera\camera.cpp" />
+    <ClCompile Include="source\graphics\renderer\material\material.cpp" />
+    <ClCompile Include="source\graphics\renderer\material\material_instance.cpp" />
+    <ClCompile Include="source\graphics\renderer\model\primitives\quad.cpp" />
+    <ClCompile Include="source\graphics\renderer\model\mesh.cpp" />
+    <ClCompile Include="source\graphics\renderer\model\primitives\cube.cpp" />
+    <ClCompile Include="source\graphics\renderer\renderer3D.cpp" />
+    <ClCompile Include="source\graphics\renderer\renderer_backend.cpp" />
+    <ClCompile Include="source\core\stdafx.cpp" />
+    <ClCompile Include="source\graphics\api\interface\resource\sampler\sampler2D.cpp" />
+    <ClCompile Include="source\graphics\api\vulkan\resource\sampler\vk_sampler2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\core\window\window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\vk_render_device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\resource\shader\vk_shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\system\file_system.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\resource\shader\shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\render_device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\object\command\command_queue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_queue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\object\command\command_pool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\object\command\command_buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_pool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\object\command\vk_command_buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\object\swapchain\swapchain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\object\swapchain\vk_swapchain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\pipeline\graphics\graphics_pipeline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\pipeline\renderpass\render_pass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\resource\texture\texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\resource\view\texture_view.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\pipeline\graphics\vk_graphics_pipeline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\resource\texture\vk_texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\resource\view\vk_texture_view.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\pipeline\framebuffer\vk_frame_buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\resource\buffer\buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\resource\buffer\vk_buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\object\sync\fence.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\object\sync\vk_fence.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\renderer\renderer_backend.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\renderer\renderer3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\renderer\material\material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\pipeline\layout\input_layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\pipeline\layout\vk_input_layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_pool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_set.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_set.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\renderer\material\material_instance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\renderer\model\mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\renderer\model\default\quad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\renderer\model\primitives\cube.cpp">
-    <ClCompile Include="source\graphics\renderer\camera\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="source\core\window\window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\vk_render_device.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\shader\vk_shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\system\file_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\shader\shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\shader\shader_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\shader\shader_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utility\hash_utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utility\string_utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utility\version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\graphics_api.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\render_device.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\render_device_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\debug_mode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_queue_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_queue_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_pool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_buffer_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_buffer_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_pool_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_pool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\swapchain\swapchain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\swapchain\swapchain_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\object\swapchain\vk_swapchain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\command\command_queue_support_bit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\graphics_pipeline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\graphics_pipeline_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\topology\topology.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\resource_bind_flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\resource_format.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\resource_state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\resource_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\texture\texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\texture\texture2D_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\view\texture_view.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\view\texture_view_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\view\resource_view_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\vk_graphics_pipeline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\texture\vk_texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\view\vk_texture_view.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_format.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_attachment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_attachment_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass_load_op.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_store_op.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_load_op.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass_store_op.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\topology\vk_topology.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\rasterizer\fill_mode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\rasterizer\cull_mode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\rasterizer\winding_order.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\rasterizer\vk_fill_mode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\rasterizer\vk_cull_mode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\rasterizer\vk_winding_order.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\viewport\view_port.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\viewport\scissor_rect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_element.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_layout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\vertex_element.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\vertex_layout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer_attachment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer_attachment_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\framebuffer\vk_frame_buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\resource_memory_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer_usage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\buffer\vk_buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\buffer\vk_buffer_usage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_memory_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\sync\fence.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\object\sync\fence_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\object\sync\vk_fence.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\model\mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\model\vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\model\sub_mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\renderer_backend.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\renderer3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\material\material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\event_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\event_category.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\event_dispatcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\window\window_resize_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_layout_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\vk_input_layout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\resource\shader\shader_type_flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_set.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool_size.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_pool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\vk_input_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_set_descriptor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_set.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_set.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\api\vulkan\resource\shader\vk_shader_type_flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\model\default\quad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\material\material_instance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\input\key_down_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\input\key_up_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\input\mouse_move_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\input\mouse_left_up_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\input\mouse_left_down_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\input\mouse_right_down_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\event\input\mouse_right_up_event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\model\primitives\cube.h">
-    <ClInclude Include="source\core\performance\timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\camera\camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\camera\perspective.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\graphics\renderer\camera\orthographic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="source\core\event\event.h" />
+    <ClInclude Include="source\core\event\event_category.h" />
+    <ClInclude Include="source\core\event\event_dispatcher.h" />
+    <ClInclude Include="source\core\event\event_type.h" />
+    <ClInclude Include="source\core\event\input\mouse_left_down_event.h" />
+    <ClInclude Include="source\core\event\input\mouse_left_up_event.h" />
+    <ClInclude Include="source\core\event\input\key_down_event.h" />
+    <ClInclude Include="source\core\event\input\key_up_event.h" />
+    <ClInclude Include="source\core\event\input\mouse_move_event.h" />
+    <ClInclude Include="source\core\event\input\mouse_right_down_event.h" />
+    <ClInclude Include="source\core\event\input\mouse_right_up_event.h" />
+    <ClInclude Include="source\core\event\window\window_resize_event.h" />
+    <ClInclude Include="source\core\logger.h" />
+    <ClInclude Include="source\core\performance\timer.h" />
+    <ClInclude Include="source\core\system\file_system.h" />
+    <ClInclude Include="source\core\window\window.h" />
+    <ClInclude Include="source\graphics\api\graphics_api.h" />
+    <ClInclude Include="source\graphics\api\interface\debug_mode.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_buffer.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_buffer_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_buffer_type.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_pool.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_pool_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_queue.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_queue_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_queue_support_bit.h" />
+    <ClInclude Include="source\graphics\api\interface\object\command\command_queue_type.h" />
+    <ClInclude Include="source\graphics\api\interface\object\swapchain\swapchain.h" />
+    <ClInclude Include="source\graphics\api\interface\object\swapchain\swapchain_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\object\sync\fence.h" />
+    <ClInclude Include="source\graphics\api\interface\object\sync\fence_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer_attachment.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer_attachment_type.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\framebuffer\frame_buffer_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\graphics_pipeline.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\graphics_pipeline_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\rasterizer\cull_mode.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\rasterizer\fill_mode.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\rasterizer\winding_order.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\topology\topology.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\viewport\scissor_rect.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\graphics\viewport\view_port.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_pool_size.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_set.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\descriptor\descriptor_set_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_element.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_layout.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_layout_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_set.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\input_type.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\vertex_element.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\layout\vertex_layout.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_attachment.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_attachment_type.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_load_op.h" />
+    <ClInclude Include="source\graphics\api\interface\pipeline\renderpass\render_pass_store_op.h" />
+    <ClInclude Include="source\graphics\api\interface\render_device.h" />
+    <ClInclude Include="source\graphics\api\interface\render_device_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\buffer\buffer_usage.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\resource_format.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\resource_memory_type.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\resource_state.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\resource_type.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\shader\shader.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\shader\shader_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\shader\shader_type_flags.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\shader\shader_type.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\texture\texture2D.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\texture\texture2D_descriptor.h" />
+    <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_buffer.h" />
+    <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_pool.h" />
+    <ClInclude Include="source\graphics\api\vulkan\object\command\vk_command_queue.h" />
+    <ClInclude Include="source\graphics\api\vulkan\object\swapchain\vk_swapchain.h" />
+    <ClInclude Include="source\graphics\api\vulkan\object\sync\vk_fence.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\framebuffer\vk_frame_buffer.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\rasterizer\vk_cull_mode.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\rasterizer\vk_fill_mode.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\rasterizer\vk_winding_order.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\topology\vk_topology.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\graphics\vk_graphics_pipeline.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_pool.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\descriptor\vk_descriptor_set.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\vk_input_layout.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\layout\vk_input_type.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass_load_op.h" />
+    <ClInclude Include="source\graphics\api\vulkan\pipeline\renderpass\vk_render_pass_store_op.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\buffer\vk_buffer.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\buffer\vk_buffer_usage.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\shader\vk_shader.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\shader\vk_shader_type_flags.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\texture\vk_texture2D.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_format.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_memory_type.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\vk_resource_state.h" />
+    <ClInclude Include="source\graphics\api\vulkan\vk_render_device.h" />
+    <ClInclude Include="source\graphics\renderer\camera\camera.h" />
+    <ClInclude Include="source\graphics\renderer\camera\orthographic.h" />
+    <ClInclude Include="source\graphics\renderer\camera\perspective.h" />
+    <ClInclude Include="source\graphics\renderer\material\material.h" />
+    <ClInclude Include="source\graphics\renderer\material\material_instance.h" />
+    <ClInclude Include="source\graphics\renderer\model\primitives\quad.h" />
+    <ClInclude Include="source\graphics\renderer\model\mesh.h" />
+    <ClInclude Include="source\graphics\renderer\model\primitives\cube.h" />
+    <ClInclude Include="source\graphics\renderer\model\sub_mesh.h" />
+    <ClInclude Include="source\graphics\renderer\model\vertex.h" />
+    <ClInclude Include="source\graphics\renderer\renderer3D.h" />
+    <ClInclude Include="source\graphics\renderer\renderer_backend.h" />
+    <ClInclude Include="source\core\stdafx.h" />
+    <ClInclude Include="source\utility\hash_utility.h" />
+    <ClInclude Include="source\utility\string_utility.h" />
+    <ClInclude Include="source\utility\version.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\sampler2D.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\sampler2D_descriptor.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\address_mode.h" />
+    <ClInclude Include="source\graphics\api\interface\resource\sampler\filter_mode.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\sampler\vk_sampler2D.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\sampler\vk_filter_mode.h" />
+    <ClInclude Include="source\graphics\api\vulkan\resource\sampler\vk_address_mode.h" />
   </ItemGroup>
 </Project>

@@ -11,11 +11,16 @@ namespace Graphics
 		virtual ~VKTexture2D();
 
 		inline VkImage GetVKTexture() const { return m_ImageObj; }
+		inline VkImageView GetVKTextureView() const { return m_ImageViewObj; }
 
 	private:
+		friend class VKSwapchain;
+		void FreeImageView();
+
 		uint32_t FindMemoryType(VKRenderDevice* _renderDevice, uint32_t typeFilter, VkMemoryPropertyFlags properties);
 
 		VkImage m_ImageObj;
+		VkImageView m_ImageViewObj;
 		VkDeviceMemory m_BufferMemory;
 	};
 }
